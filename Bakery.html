@@ -1,0 +1,2464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Special+Gothic+Expanded+One&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .fixed {
+            position: fixed;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: transparent;
+            z-index: 999;
+            font-size: 5rem;
+            font-family: "Special Gothic Expanded One", sans-serif;
+            text-transform: uppercase;
+        }
+
+        .fixed span:nth-child(1) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #f14d0c;
+            transition: 0.5s;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            overflow: hidden;
+        }
+
+        .fixed.active:hover span:nth-child(1) {
+            transform: translateY(-18px);
+        }
+
+        .fixed span:nth-child(2) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #f14d0c;
+            transition: 0.5s;
+            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+            overflow: hidden;
+        }
+
+        .fixed.active:hover span:nth-child(2) {
+            transform: translateY(18px);
+        }
+
+        .fixed span:nth-child(3) {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%) scaleY(0);
+            width: 100%;
+            color: #ffe23c;
+            background: #c71550;
+            font-size: 0.25em;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-align: center;
+            padding-left: 5px;
+            margin-left: 5px;
+            transition: 0.5s;
+            white-space: nowrap;
+        }
+
+        .fixed.active:hover span:nth-child(3) {
+            transform: translateY(-50%) scaleY(1);
+        }
+
+        html {
+            background: #ffffff;
+            cursor: pointer;
+        }
+
+        body {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            pointer-events: none;
+        }
+
+        .transition {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .tagline {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: transparent;
+            text-transform: uppercase;
+            font-family: consolas, monospace;
+            z-index: 998;
+            opacity: 0;
+            display: none;
+        }
+
+        .tagline span:nth-child(1) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #000;
+            transition: 0.5s;
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 0 50%);
+            overflow: hidden;
+        }
+
+        .tagline:hover span:nth-child(1) {
+            transform: translateY(-18px);
+        }
+
+        .tagline span:nth-child(2) {
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #000;
+            transition: 0.5s;
+            clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+            overflow: hidden;
+        }
+
+        .tagline:hover span:nth-child(2) {
+            transform: translateY(18px);
+        }
+
+        .tagline span:nth-child(3) {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%) scaleY(0);
+            width: 91%;
+            color: #ffe23c;
+            background: #c71550;
+            font-size: 0.25em;
+            font-weight: 500;
+            letter-spacing: 0.7em;
+            text-align: center;
+            padding-left: 5px;
+            margin-left: 5px;
+            transition: 0.5s;
+        }
+
+        .tagline:hover span:nth-child(3) {
+            transform: translateY(-50%) scaleY(1);
+        }
+
+        .subtitle {
+            position: fixed;
+            top: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-style: italic;
+            color: #c71550;
+            font-size: 1.2rem;
+            font-family: Georgia, serif;
+            z-index: 998;
+            opacity: 0;
+        }
+
+        .tabs-container {
+            position: fixed;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 998;
+            opacity: 0;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .tab-content {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 1200px;
+            z-index: 1000;
+            opacity: 0;
+            display: block !important;
+            padding: 2rem;
+            padding-bottom: 4rem;
+            background: #f5f5f5;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        body:has(.tab-content) {
+            min-height: 200vh;
+        }
+
+        .tab-section {
+            width: 100%;
+        }
+
+        .about-content,
+        .bushwick-content,
+        .washingtonheights-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-title,
+        .bushwick-title,
+        .washingtonheights-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #c71550;
+            margin-bottom: 2rem;
+            font-family: "Special Gothic Expanded One", sans-serif;
+        }
+
+        .about-text {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .about-image {
+            margin-top: 3rem;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .location-content {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .location-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .location-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #c71550;
+            margin-bottom: 0.5rem;
+            font-family: "Special Gothic Expanded One", sans-serif;
+        }
+
+        .location-phone {
+            font-size: 1.2rem;
+            color: #ffe23c;
+            font-weight: 600;
+            margin-bottom: 0;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .location-address {
+            font-size: 1.2rem;
+            color: #f14d0c;
+            font-weight: 600;
+            margin-bottom: 0;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .location-cards {
+            display: flex;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .location-left-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .location-right-column {
+            flex: 1;
+        }
+
+        .hours-card {
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e0e0e0;
+        }
+
+        .receipt-card {
+            height: 100%;
+            background: #F8C8DC;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 2px dashed #999;
+            font-family: 'Courier New', monospace;
+        }
+
+        .receipt-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 2px dashed #999;
+            padding-bottom: 1rem;
+        }
+
+        .receipt-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .receipt-items li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            border-bottom: 1px dotted #ccc;
+            font-size: 0.95rem;
+        }
+
+        .receipt-items li:last-child {
+            border-bottom: none;
+        }
+
+        .receipt-item-name {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .receipt-item-price {
+            color: #666;
+            font-weight: bold;
+        }
+
+        .neon-hours-title {
+            font-size: 2.5rem;
+            color: #c71550;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-family: "Special Gothic Expanded One", sans-serif;
+        }
+
+        .location-map {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border: 2px solid #e0e0e0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .location-map iframe {
+            width: 100%;
+            flex: 1;
+            border: none;
+            border-radius: 0.5rem;
+        }
+
+        .hours-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-day {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .hours-time {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .location-address {
+            font-size: 1.3rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .location-address p {
+            margin: 0.5rem 0;
+        }
+
+        .location-hours {
+            margin-top: 2rem;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .location-hours h4 {
+            font-size: 1.5rem;
+            color: #be1c1c;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .location-hours p {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0.5rem 0;
+        }
+
+        .home-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-direction: row-reverse;
+        }
+
+        .home-text {
+            flex: 1.5;
+            padding-top: 0.5rem;
+            margin-left: 0rem;
+        }
+
+        .home-text h3 {
+            font-size: 2rem;
+            font-weight: 400;
+            color: #be1c1c;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            white-space: nowrap;
+            font-family: "Special Gothic Expanded One", sans-serif;
+        }
+
+        .home-text p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.6;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .home-image {
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .hover-3d {
+            position: relative;
+            width: 100%;
+            height: auto;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            cursor: pointer;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .hover-3d figure {
+            position: relative;
+            width: 75%;
+            height: auto;
+            aspect-ratio: 4/3;
+            margin: 0;
+            transform-style: preserve-3d;
+            transition: transform 0.1s;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .hover-3d figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hover-3d>div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .gallery-section {
+            width: 100%;
+            max-width: 1200px;
+            padding: 2rem 0;
+            margin-top: 1rem;
+        }
+
+        .gallery-title {
+            font-size: 2rem;
+            font-weight: 400;
+            text-align: center;
+            color: #c71550;
+            margin-bottom: 2rem;
+            margin-top: -2rem;
+            font-family: "Special Gothic Expanded One", sans-serif;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            padding-top: 100%;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .gallery-modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(0.8);
+            transition: transform 0.3s;
+        }
+
+        .gallery-modal.active .gallery-modal-content {
+            transform: scale(1);
+        }
+
+        .gallery-modal-content img {
+            max-height: 90vh;
+            max-width: 90vw;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 0.5rem;
+        }
+
+        .gallery-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .gallery-modal-close:hover {
+            transform: scale(1.2);
+        }
+
+        .location-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .location-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: #c71550;
+            margin-bottom: -0.6rem;
+            font-family: "Special Gothic Expanded One", sans-serif;
+        }
+
+        .location-phone {
+            font-size: 1.2rem;
+            color: #ffe23c;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .location-address {
+            font-size: 1.2rem;
+            color: #f14d0c;
+            font-weight: 600;
+            margin-bottom: 0;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .location-address p {
+            margin: 0.5rem 0;
+        }
+
+        .location-hours {
+            margin-top: 2rem;
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        .location-hours h4 {
+            font-size: 1.5rem;
+            color: #be1c1c;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .location-hours p {
+            font-size: 1.1rem;
+            color: #666;
+            margin: 0.5rem 0;
+        }
+
+        .card-carousel-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .card-carousel-container {
+            display: flex;
+            gap: 1rem;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            max-width: 950px;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .card-carousel-container .card {
+            flex: 0 0 calc(33.333% - 0.667rem);
+            min-width: calc(33.333% - 0.667rem);
+            max-width: calc(33.333% - 0.667rem);
+        }
+
+        .card-carousel-container .card .card-body {
+            text-align: center;
+            align-items: center;
+        }
+
+        .card-carousel-container .card .card-title {
+            justify-content: center;
+        }
+
+        .card-carousel-container .card .card-actions {
+            justify-content: center;
+        }
+
+        .card-carousel-container .card:nth-child(n+4) {
+            display: none;
+        }
+
+        .carousel-buttons {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .carousel-buttons.hidden {
+            display: none;
+        }
+
+        .carousel-btn {
+            padding: 0.3rem 1rem;
+            background: #c71550;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            min-width: 80px;
+        }
+
+        .carousel-btn:hover {
+            background: #a01040;
+        }
+
+        .carousel-btn:active {
+            background: #8a0e35;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .menu-accordions .collapse {
+            background: #ffe5d4;
+            border: none !important;
+            margin-bottom: 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .menu-accordions .collapse-title {
+            color: #f14d0c;
+            font-weight: 600;
+            font-family: "Special Gothic Expanded One", sans-serif;
+        }
+
+        /* Accomplishments section styling */
+        #accomplishments-section .grid {
+            align-items: start;
+        }
+
+        #accomplishments-section .testimonials,
+        #accomplishments-section .achievements {
+            height: 100%;
+        }
+
+        #accomplishments-section .card-side {
+            height: 140px;
+            overflow: hidden;
+        }
+
+        #accomplishments-section .card-side figure {
+            width: 140px;
+            min-width: 140px;
+            height: 140px;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        #accomplishments-section .card-side figure img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        #accomplishments-section .card-side .card-body {
+            padding: 1rem;
+            justify-content: space-between;
+        }
+
+        #accomplishments-section .card-side .card-body .card-title {
+            font-size: 1rem;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        #accomplishments-section .card-side .card-body p {
+            font-size: 0.875rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        #accomplishments-section .card-side .card-body .btn {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            min-height: auto;
+            height: auto;
+            background-color: #ec4899;
+            color: #fce7f3;
+            border: none;
+        }
+
+        #accomplishments-section .card-side .card-body .btn:hover {
+            background-color: #db2777;
+        }
+
+        #accomplishments-section .card-side .card-body .card-actions {
+            margin-top: auto;
+            padding-top: 0;
+        }
+
+        #accomplishments-section .card-side {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        #accomplishments-section .card-side .card-body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        #accomplishments-section .card-title {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        #accomplishments-section p {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Repeats because of the split effect -->
+    <h2 class="fixed braces">
+        AZÚCAR
+        <span>AZÚCAR</span>
+        <span>AZÚCAR</span>
+        <span>Baked with sabor</span>
+    </h2>
+
+    <h2 class="tagline">
+        Baked with sabor
+        <span>Baked with sabor</span>
+        <span>Baked with sabor</span>
+        <span>bringing sweetness to brooklyn</span>
+    </h2>
+
+    <p class="subtitle">Serving the community of brooklyn since 2009</p>
+    <div class="tabs-container">
+        <div role="tablist" class="tabs tabs-bordered">
+            <a role="tab" class="tab tab-active" data-tab="home">Home</a>
+            <a role="tab" class="tab" data-tab="bushwick">Bushwick</a>
+            <a role="tab" class="tab" data-tab="washingtonheights">Washington Heights</a>
+            <a role="tab" class="tab" data-tab="accomplishments">Accomplishments</a>
+            <a role="tab" class="tab" data-tab="catering">Catering</a>
+        </div>
+    </div>
+
+    <!-- HOME -->
+    <div class="tab-content">
+        <div class="tab-section" id="home-section">
+            <div class="about-content">
+                <h3 class="about-title">Our Story</h3>
+                <p class="about-text">AZÚCAR was born from a love of Dominican tradition and the joy of celebration.
+                    Every cake we bake carries the flavors of home — rich, moist, and made from scratch with care.</p>
+                <p class="about-text">From birthdays to weddings to Sunday family gatherings, our desserts are made to
+                    bring people together.</p>
+                <div class="about-image">
+                    <img src="https://nugget-markets-01.s3.us-west-1.amazonaws.com/nugget/p/bakery-team-2019-oo7i330fabn2mpbf.jpg"
+                        alt="Bakery Team" />
+                </div>
+            </div>
+            <br>
+
+            <div class="gallery-section">
+                <h3 class="gallery-title">Gallery</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-index="0">
+                        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/1e/f8/14/i-was-just-overwhelm.jpg?w=800&h=800&fit=crop"
+                            alt="Assorted Cakes">
+                    </div>
+                    <div class="gallery-item" data-index="1">
+                        <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=800&h=800&fit=crop"
+                            alt="Cupcakes">
+                    </div>
+                    <div class="gallery-item" data-index="2">
+                        <img src="https://platform.ny.eater.com/wp-content/uploads/sites/6/2025/07/IMG_8384.jpeg?w=800&h=800&fit=crop"
+                            alt="Macarons">
+                    </div>
+                    <div class="gallery-item" data-index="3">
+                        <img src="https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=800&h=800&fit=crop"
+                            alt="Pastries">
+                    </div>
+                    <div class="gallery-item" data-index="4">
+                        <img src="https://higherlogicdownload.s3.amazonaws.com/RETAILBAKERSOFAMERICA/FeaturedImages/5f6df044-04b6-4542-82a5-e0bc64ed306c-L.Png?w=800&h=800&fit=crop"
+                            alt="Cookies">
+                    </div>
+                    <div class="gallery-item" data-index="5">
+                        <img src="https://s43098.pcdn.co/wp-content/uploads/2025/01/Inside-the-Bakery-768x399.png?w=800&h=800&fit=crop"
+                            alt="Bread">
+                    </div>
+                    <div class="gallery-item" data-index="4">
+                        <img src="https://thumbs.dreamstime.com/b/bakery-shop-window-sweet-bakery-shop-window-sweet-spot-sign-displays-various-pastries-tiered-stands-including-419136197.jpg?w=800&h=800&fit=crop"
+                            alt="Cookies">
+                    </div>
+                    <div class="gallery-item" data-index="5">
+                        <img src="https://cdn2.psychologytoday.com/assets/styles/manual_crop_4_3_1200x900/public/field_blog_entry_teaser_image/2018-10/shutterstock_96710125.jpg?w=800&h=800&fit=crop"
+                            alt="Bread">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="home-content">
+                <div class="home-text">
+                    <h3>Authentic Dominican Cakes & Sweets in Every Bite</h3>
+                    <p>From classic dominican cake to handcrafted macarons, AZÚCAR brings Caribbean flavor to your
+                        celebrations.</p>
+                </div>
+                <div class="home-image">
+                    <div class="hover-3d">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <figure class="max-w-100 rounded-2xl">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYTd7h3ki-cHG00Az8edpgM2ms2Pb7s6o-Ig&s"
+                                alt="Dominican cake" />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BUSHWICK -->
+        <div class="tab-section" id="bushwick-section" style="display: none;">
+            <div class="location-content">
+                <div class="location-header">
+                    <h3 class="location-title">Bushwick</h3>
+                    <p class="location-address">717 Knickerbocker Ave, Brooklyn, NY 11221</p>
+                    <p class="location-phone">(718) 555-0123</p>
+                </div>
+
+                <div class="location-cards">
+                    <div class="location-left-column">
+                        <div class="hours-card">
+                            <h2 class="neon-hours-title">Hours</h2>
+                            <ul class="hours-list">
+                                <li>
+                                    <span class="hours-day">Monday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Tuesday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Wednesday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Thursday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Friday</span>
+                                    <span class="hours-time">7am - 9pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Saturday</span>
+                                    <span class="hours-time">8am - 9pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Sunday</span>
+                                    <span class="hours-time">8am - 7pm</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="location-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.8662475897424!2d-73.91853892346188!3d40.70397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25c0a8d5b7e3d%3A0x7e1f3c8b9d5c7e3d!2s717%20Knickerbocker%20Ave%2C%20Brooklyn%2C%20NY%2011221!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="location-right-column">
+                        <div class="receipt-card">
+                            <h3 class="receipt-title">MENU</h3>
+                            <ul class="receipt-items">
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Dominican Cake</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Slice</span>
+                                    <span class="receipt-item-price">$5.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">1/2 Pound</span>
+                                    <span class="receipt-item-price">$30.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Pound</span>
+                                    <span class="receipt-item-price">$50.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Two Tier</span>
+                                    <span class="receipt-item-price">$90.00</span>
+                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Tres Leches</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Slice</span>
+                                    <span class="receipt-item-price">$6.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Small</span>
+                                    <span class="receipt-item-price">$20.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Large</span>
+                                    <span class="receipt-item-price">$35.00</span>
+                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Flan</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Slice</span>
+                                    <span class="receipt-item-price">$4.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Pan</span>
+                                    <span class="receipt-item-price">$25.00</span>
+                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Cupcakes</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Single</span>
+                                    <span class="receipt-item-price">$4.50</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">6-pack</span>
+                                    <span class="receipt-item-price">$23.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">12-pack</span>
+                                    <span class="receipt-item-price">$42.00</span>
+                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Macarons</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Single</span>
+                                    <span class="receipt-item-price">$2.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">6-pack</span>
+                                    <span class="receipt-item-price">$10.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">12-pack</span>
+                                    <span class="receipt-item-price">$18.00</span>
+                                </li>
+
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">House Made Juices</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Small</span>
+                                    <span class="receipt-item-price">$7.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Large</span>
+                                    <span class="receipt-item-price">$9.00</span>
+                                </li>
+                                <li>
+                                    <span class="receipt-item-name">Fritos</span>
+                                    <span class="receipt-item-price">$3.50</span>
+                                </li>
+                                <li>
+                                    <span class="receipt-item-name">Dominican Soda(Country Club)</span>
+                                    <span class="receipt-item-price">$3.00</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="menu-accordions" style="margin-top: 2rem;">
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="bushwick-accordion" />
+                        <div class="collapse-title font-semibold">Cakes</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="bushwick-cakes">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://karinabakeswithlove.com/wp-content/uploads/2025/03/B4A45F81-21DE-41B6-8140-5ED68B274766.jpeg?w=800&h=800&fit=crop"
+                                                alt="Dominican Cake" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Classic Dominican Cake
+                                            </h2>
+                                            <p>Moist layers with pineapple, guava, and sweet meringue frosting</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Guava</div>
+                                                <div class="badge badge-outline">Pineapple</div>
+                                                <div class="badge badge-outline">Dulce de Leche</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.allrecipes.com/thmb/DhQ2eIqDrFjasvN_oJp-ElddwEA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8652738-strawberry-tres-leches-cake-ddmfs-5419-hero-3x4-725b2a639ed94554ac3ae09573f6c423.jpg?w=800&h=800&fit=crop"
+                                                alt="Decorated Cake" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Tres Leches
+                                            </h2>
+                                            <p>Soaked in three milks with whipped cream topping</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Moist</div>
+                                                <div class="badge badge-outline">Creamy</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.allrecipes.com/thmb/mjNWjdRtOboZSuESneIqxkyl-hg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/691985_Spanish-Flan-4x3-7747e8e376af4682ba31f7163d322c15.jpg?w=800&h=800&fit=crop"
+                                                alt="Dominican Cake" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Flan
+                                            </h2>
+                                            <p>Creamy caramel custard dessert with a smooth texture</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Sweet</div>
+                                                <div class="badge badge-outline">Custard</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev"
+                                        data-target="bushwick-cakes">&lt;</button>
+                                    <button class="carousel-btn" data-action="next"
+                                        data-target="bushwick-cakes">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="bushwick-accordion" />
+                        <div class="collapse-title font-semibold">Other Desserts</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="bushwick-desserts">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.magnoliabakery.com/cdn/shop/products/BestofNewYorkCupcakeAssortment_2048x.png?v=1688054769?w=800&h=800&fit=crop"
+                                                alt="Classic Flan" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Cupcakes
+                                            </h2>
+                                            <p>American style cupcakes with various flavors and frostings</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Vanilla</div>
+                                                <div class="badge badge-outline">Chocolate</div>
+                                                <div class="badge badge-outline">Cookies and Cream</div>
+                                                <div class="badge badge-outline">Red Velvet</div>
+                                                <div class="badge badge-outline">Strawberry</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.jordanwinery.com/wp-content/uploads/2020/04/French-Macaron-Cookie-Recipe-WebHero-6435.jpg?w=800&h=800&fit=crop"
+                                                alt="Coconut Flan" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Macarons
+                                            </h2>
+                                            <p>Tropical twist of a French classic</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Guava</div>
+                                                <div class="badge badge-outline">Dulce de Leche</div>
+                                                <div class="badge badge-outline">Papaya</div>
+                                                <div class="badge badge-outline">Passion Fruit</div>
+                                                <div class="badge badge-outline">Strawberry</div>
+                                                <div class="badge badge-outline">Pistachio</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev"
+                                        data-target="bushwick-desserts">&lt;</button>
+                                    <button class="carousel-btn" data-action="next"
+                                        data-target="bushwick-desserts">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="bushwick-accordion" />
+                        <div class="collapse-title font-semibold">Fritos</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="bushwick-fritos">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.kitchengidget.com/wp-content/uploads/2016/02/Puerto-Rican-Papas-Rellenas-2.jpg?w=800&h=800&fit=crop"
+                                                alt="Rellenos" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Rellenos
+                                            </h2>
+                                            <p>Fried yuca stuffed with savory meat filling</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Savory</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://images.squarespace-cdn.com/content/v1/602bd23b04cc80278e115ed4/c30b563e-e52a-42a7-87af-c1469b5255cd/BEST+DOMINICAN+QUIPES+%281%29.png?w=800&h=800&fit=crop"
+                                                alt="Quipes" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Quipes
+                                            </h2>
+                                            <p>Crispy bulgur wheat torpedo filled with seasoned beef</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Earthy</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://i.ytimg.com/vi/kFZpdb54LZk/maxresdefault.jpg?w=800&h=800&fit=crop"
+                                                alt="Bolla de Yuca" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Bola de Yuca
+                                            </h2>
+                                            <p>Cheese-filled yuca fritters, crispy outside and soft inside</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Vegetarian</div>
+                                                <div class="badge badge-outline">Mozzarella</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://tucsonmeetyourself.org/wp-content/uploads/2020/Empanadas%20El%20Domincano.jpg.jpg?w=800&h=800&fit=crop"
+                                                alt="Pastelitos" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Pastelitos (Empanadas)
+                                            </h2>
+                                            <p>Flaky turnovers filled with meat or cheese</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Mozzarella</div>
+                                                <div class="badge badge-outline">Beef</div>
+                                                <div class="badge badge-outline">Chicken</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.cheffranksmarket.com/cdn/shop/files/image.png?v=1691175529?w=800&h=800&fit=crop"
+                                                alt="Alcapurria" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Alcapurria
+                                            </h2>
+                                            <p>Fried plantain and yuca dough stuffed with seasoned meat</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Hearty</div>
+                                                <div class="badge badge-outline">Beef</div>
+                                                <div class="badge badge-outline">Chicken</div>
+                                                <div class="badge badge-outline">Pork</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev"
+                                        data-target="bushwick-fritos">&lt;</button>
+                                    <button class="carousel-btn" data-action="next"
+                                        data-target="bushwick-fritos">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="bushwick-accordion" />
+                        <div class="collapse-title font-semibold">Drinks</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="bushwick-drinks">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://images.ctfassets.net/rric2f17v78a/pn9aEDSWZY4P5U9atR9z5/89b1f9e3c9a8dd56dac81938c1eb3c6f/open-a-smoothie-shop.jpg?w=800&h=800&fit=crop"
+                                                alt="Colorful Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                House Made Juices
+                                            </h2>
+                                            <p>Tropical fruits juiced fresh</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Guava</div>
+                                                <div class="badge badge-outline">Coconut</div>
+                                                <div class="badge badge-outline">Papaya</div>
+                                                <div class="badge badge-outline">Passion Fruit</div>
+                                                <div class="badge badge-outline">Pineapple</div>
+                                                <div class="badge badge-outline">Tamarind</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.uncommoncaribbean.com/wp-content/uploads/2013/07/frambuesa.jpg?w=800&h=800&fit=crop"
+                                                alt="Tropical Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Imported Soda
+                                            </h2>
+                                            <p>Country Club imported</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Cherry</div>
+                                                <div class="badge badge-outline">Raspberry</div>
+                                                <div class="badge badge-outline">Orange</div>
+                                                <div class="badge badge-outline">Grape</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://thebeerly.com/uploads/presidente-pilsner.jpg?w=800&h=800&fit=crop"
+                                                alt="Gift Box Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Beer
+                                            </h2>
+                                            <p>Presidente, the beer of the country</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Premium</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0RiiNIgDI2xgh8ET8mufTT_klr-arqUk0LQ&s?w=800&h=800&fit=crop"
+                                                alt="Rose Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Bottled soda and water
+                                            </h2>
+                                            <p>American soda and water brands</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Coke</div>
+                                                <div class="badge badge-outline">Sprite</div>
+                                                <div class="badge badge-outline">Pepsi</div>
+                                                <div class="badge badge-outline">Poland Springs</div>
+                                                <div class="badge badge-outline">Fiji</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev"
+                                        data-target="bushwick-drinks">&lt;</button>
+                                    <button class="carousel-btn" data-action="next"
+                                        data-target="bushwick-drinks">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- WASHINGTON HEIGHTS -->
+        <div class="tab-section" id="washingtonheights-section" style="display: none;">
+            <div class="location-content">
+                <div class="location-header">
+                    <h3 class="location-title">Washington Heights</h3>
+                    <p class="location-address">2220 Amsterdam Ave, New York, NY 10032</p>
+                    <p class="location-phone">(212) 555-0456</p>
+                </div>
+
+                <div class="location-cards">
+                    <div class="location-left-column">
+                        <div class="hours-card">
+                            <h2 class="neon-hours-title">Hours</h2>
+                            <ul class="hours-list">
+                                <li>
+                                    <span class="hours-day">Monday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Tuesday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Wednesday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Thursday</span>
+                                    <span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Friday</span>
+                                    <span class="hours-time">7am - 9pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Saturday</span>
+                                    <span class="hours-time">8am - 9pm</span>
+                                </li>
+                                <li>
+                                    <span class="hours-day">Sunday</span>
+                                    <span class="hours-time">8am - 7pm</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="location-map">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3017.8162475897424!2d-73.93853892346188!3d40.84397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f63f32b0b7e3%3A0x7e1f3c8b9d5c7e3d!2s2220%20Amsterdam%20Ave%2C%20New%20York%2C%20NY%2010032!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="location-right-column">
+                        <div class="receipt-card">
+                            <h3 class="receipt-title">MENU</h3>
+                            <ul class="receipt-items">
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Dominican Cake</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Slice</span>
+                                    <span class="receipt-item-price">$5.50</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">1/2 Pound</span>
+                                    <span class="receipt-item-price">$32.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Pound</span>
+                                    <span class="receipt-item-price">$52.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Two Tier</span>
+                                    <span class="receipt-item-price">$95.00</span>
+                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Tres Leches</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Slice</span>
+                                    <span class="receipt-item-price">$6.50</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Small</span>
+                                    <span class="receipt-item-price">$22.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Large</span>
+                                    <span class="receipt-item-price">$37.00</span>
+                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Flan</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Slice</span>
+                                    <span class="receipt-item-price">$4.50</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Pan</span>
+                                    <span class="receipt-item-price">$27.00</span>
+                                </li>
+
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Cupcakes</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Single</span>
+                                    <span class="receipt-item-price">$4.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">6-pack</span>
+                                    <span class="receipt-item-price">$22.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">12-pack</span>
+                                    <span class="receipt-item-price">$40.00</span>
+                                </li>
+
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Macarons</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Single</span>
+                                    <span class="receipt-item-price">$2.25</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">6-pack</span>
+                                    <span class="receipt-item-price">$11.00</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">12-pack</span>
+                                    <span class="receipt-item-price">$20.00</span>
+                                </li>
+
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">House Made Juices</span>
+                                    <span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Small</span>
+                                    <span class="receipt-item-price">$7.50</span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                    <span class="receipt-item-name">Large</span>
+                                    <span class="receipt-item-price">$9.50</span>
+                                </li>
+                                <li>
+                                    <span class="receipt-item-name">Fritos</span>
+                                    <span class="receipt-item-price">$3.50</span>
+                                </li>
+                                <li>
+                                    <span class="receipt-item-name">Dominican Soda(Country Club)</span>
+                                    <span class="receipt-item-price">$3.00</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="menu-accordions" style="margin-top: 2rem;">
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="washingtonheights-accordion" />
+                        <div class="collapse-title font-semibold">Cakes</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="dominican-cake">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://karinabakeswithlove.com/wp-content/uploads/2025/03/B4A45F81-21DE-41B6-8140-5ED68B274766.jpeg?w=800&h=800&fit=crop"
+                                                alt="Dominican Cake" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Classic Dominican Cake
+
+                                            </h2>
+                                            <p>Moist layers with pineapple, guava, and sweet meringue frosting</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Guava</div>
+                                                <div class="badge badge-outline">Pineapple</div>
+                                                <div class="badge badge-outline">Dulce de Leche</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.allrecipes.com/thmb/DhQ2eIqDrFjasvN_oJp-ElddwEA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/8652738-strawberry-tres-leches-cake-ddmfs-5419-hero-3x4-725b2a639ed94554ac3ae09573f6c423.jpg?w=800&h=800&fit=crop"
+                                                alt="Decorated Cake" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Tres Leches
+                                            </h2>
+                                            <p>Soaked in three milks with whipped cream topping</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Moist</div>
+                                                <div class="badge badge-outline">Creamy</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.allrecipes.com/thmb/mjNWjdRtOboZSuESneIqxkyl-hg=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/691985_Spanish-Flan-4x3-7747e8e376af4682ba31f7163d322c15.jpg?w=800&h=800&fit=crop"
+                                                alt="Dominican Cake" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Flan
+                                            </h2>
+                                            <p>Creamy caramel custard dessert with a smooth texture</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Sweet</div>
+                                                <div class="badge badge-outline">Custard</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev"
+                                        data-target="dominican-cake">&lt;</button>
+                                    <button class="carousel-btn" data-action="next"
+                                        data-target="dominican-cake">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="washingtonheights-accordion" />
+                        <div class="collapse-title font-semibold">Other Desserts</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="desserts">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.magnoliabakery.com/cdn/shop/products/BestofNewYorkCupcakeAssortment_2048x.png?v=1688054769?w=800&h=800&fit=crop"
+                                                alt="Classic Flan" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Cupcakes
+                                            </h2>
+                                            <p>American style cupcakes with various flavors and frostings</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Vanilla</div>
+                                                <div class="badge badge-outline">Chocolate</div>
+                                                <div class="badge badge-outline">Cookies and Cream</div>
+                                                <div class="badge badge-outline">Red Velvet</div>
+                                                <div class="badge badge-outline">Strawberry</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.jordanwinery.com/wp-content/uploads/2020/04/French-Macaron-Cookie-Recipe-WebHero-6435.jpg?w=800&h=800&fit=crop"
+                                                alt="Coconut Flan" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Macarons
+                                            </h2>
+                                            <p>Tropical twist of a French classic</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Guava</div>
+                                                <div class="badge badge-outline">Dulce de Leche</div>
+                                                <div class="badge badge-outline">Papaya</div>
+                                                <div class="badge badge-outline">Passion Fruit</div>
+                                                <div class="badge badge-outline">Strawberry</div>
+                                                <div class="badge badge-outline">Pistachio</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev" data-target="desserts">&lt;</button>
+                                    <button class="carousel-btn" data-action="next" data-target="desserts">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="washingtonheights-accordion" />
+                        <div class="collapse-title font-semibold">Fritos</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="fritos">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.kitchengidget.com/wp-content/uploads/2016/02/Puerto-Rican-Papas-Rellenas-2.jpg?w=800&h=800&fit=crop"
+                                                alt="Rellenos" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Rellenos
+                                            </h2>
+                                            <p>Fried yuca stuffed with savory meat filling</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Savory</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://images.squarespace-cdn.com/content/v1/602bd23b04cc80278e115ed4/c30b563e-e52a-42a7-87af-c1469b5255cd/BEST+DOMINICAN+QUIPES+%281%29.png?w=800&h=800&fit=crop"
+                                                alt="Quipes" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Quipes
+                                            </h2>
+                                            <p>Crispy bulgur wheat torpedo filled with seasoned beef</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Earthy</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://i.ytimg.com/vi/kFZpdb54LZk/maxresdefault.jpg?w=800&h=800&fit=crop"
+                                                alt="Bolla de Yuca" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Bola de Yuca
+                                            </h2>
+                                            <p>Cheese-filled yuca fritters, crispy outside and soft inside</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Vegetarian</div>
+                                                <div class="badge badge-outline">Mozzarella</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://tucsonmeetyourself.org/wp-content/uploads/2020/Empanadas%20El%20Domincano.jpg.jpg?w=800&h=800&fit=crop"
+                                                alt="Pastelitos" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Pastelitos (Empanadas)
+                                            </h2>
+                                            <p>Flaky turnovers filled with meat or cheese</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Mozzarella</div>
+                                                <div class="badge badge-outline">Beef</div>
+                                                <div class="badge badge-outline">Chicken</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.cheffranksmarket.com/cdn/shop/files/image.png?v=1691175529?w=800&h=800&fit=crop"
+                                                alt="Alcapurria" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Alcapurria
+                                            </h2>
+                                            <p>Fried plantain and yuca dough stuffed with seasoned meat</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Hearty</div>
+                                                <div class="badge badge-outline">Beef</div>
+                                                <div class="badge badge-outline">Chicken</div>
+                                                <div class="badge badge-outline">Pork</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev" data-target="fritos">&lt;</button>
+                                    <button class="carousel-btn" data-action="next" data-target="fritos">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="collapse bg-base-100">
+                        <input type="radio" name="washingtonheights-accordion" />
+                        <div class="collapse-title font-semibold">Drinks</div>
+                        <div class="collapse-content text-sm">
+                            <div class="card-carousel-wrapper">
+                                <div class="card-carousel-container" data-carousel="drinks">
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://images.ctfassets.net/rric2f17v78a/pn9aEDSWZY4P5U9atR9z5/89b1f9e3c9a8dd56dac81938c1eb3c6f/open-a-smoothie-shop.jpg?w=800&h=800&fit=crop"
+                                                alt="Colorful Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                House Made Juices
+                                            </h2>
+                                            <p>Tropical fruits juiced fresh</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Guava</div>
+                                                <div class="badge badge-outline">Coconut</div>
+                                                <div class="badge badge-outline">Papaya</div>
+                                                <div class="badge badge-outline">Passion Fruit</div>
+                                                <div class="badge badge-outline">Pineapple</div>
+                                                <div class="badge badge-outline">Tamarind</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://www.uncommoncaribbean.com/wp-content/uploads/2013/07/frambuesa.jpg?w=800&h=800&fit=crop"
+                                                alt="Tropical Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Imported Soda
+                                            </h2>
+                                            <p>Country Club imported</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Cherry</div>
+                                                <div class="badge badge-outline">Raspberry</div>
+                                                <div class="badge badge-outline">Orange</div>
+                                                <div class="badge badge-outline">Grape</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://thebeerly.com/uploads/presidente-pilsner.jpg?w=800&h=800&fit=crop"
+                                                alt="Gift Box Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Beer
+                                            </h2>
+                                            <p>Presidente, the beer of the country</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Premium</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card bg-base-100 shadow-sm">
+                                        <figure class="h-48">
+                                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0RiiNIgDI2xgh8ET8mufTT_klr-arqUk0LQ&s?w=800&h=800&fit=crop"
+                                                alt="Rose Macarons" class="w-full h-full object-cover" />
+                                        </figure>
+                                        <div class="card-body">
+                                            <h2 class="card-title text-base">
+                                                Bottled soda and water
+                                            </h2>
+                                            <p>American soda and water brands</p>
+                                            <div class="card-actions justify-end">
+                                                <div class="badge badge-outline">Coke</div>
+                                                <div class="badge badge-outline">Sprite</div>
+                                                <div class="badge badge-outline">Pepsi</div>
+                                                <div class="badge badge-outline">Poland Springs</div>
+                                                <div class="badge badge-outline">Fiji</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-buttons">
+                                    <button class="carousel-btn" data-action="prev" data-target="drinks">&lt;</button>
+                                    <button class="carousel-btn" data-action="next" data-target="drinks">&gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ACCOMPLISHMENTS -->
+
+        <div class="tab-section" id="accomplishments-section" style="display: none;">
+            <div class="grid grid-cols-3 gap-8 p-8">
+                <!-- Left Side: Testimonials -->
+                <div class="testimonials col-span-1">
+                    <!-- Phone Mockup -->
+                    <div class="flex justify-center mb-8">
+                        <div class="mockup-phone">
+                            <div class="camera"></div>
+                            <div class="display">
+                                <div
+                                    class="artboard artboard-demo phone-1 bg-neutral-900 text-white flex flex-col justify-center items-center p-4">
+                                    <div class="chat chat-start w-full mb-4">
+                                        <div class="chat-bubble">
+                                            The tres leches cake is absolutely divine! Best I've ever had.
+                                        </div>
+                                    </div>
+                                    <div class="chat chat-end w-full mb-4">
+                                        <div class="chat-bubble">Amazing authentic Dominican flavors!</div>
+                                    </div>
+                                    <div class="chat chat-start w-full mb-4">
+                                        <div class="chat-bubble">
+                                            <div class="rating">
+                                                <input type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled />
+                                                <input type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled />
+                                                <input type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled />
+                                                <input type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled />
+                                                <input type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" checked disabled />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chat chat-end w-full">
+                                        <div class="chat-bubble">Will definitely be back for more!</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Accomplishment Cards -->
+                <div class="achievements flex flex-col gap-4 col-span-2">
+                    <div class="card card-side bg-base-100 shadow-sm">
+                        <figure>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/James_Beard_Foundation_Award_for_Excellence_medallion.jpg"
+                                alt="James Beard Award" />
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title">James Beard Award for Excellence</h2>
+                            <p>In 2024 we received the James Beard Award for Excellence which is a prestigious
+                                recognition in the culinary world.</p>
+                            <div class="card-actions justify-end">
+                                <!-- <button class="btn btn-primary">Article</button> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-side bg-base-100 shadow-sm">
+                        <figure>
+                            <img src="https://m.media-amazon.com/images/M/MV5BYjJhZjA5YmMtNmRkOC00N2QzLWJhZjUtNjZlMWRjZWE0NjYwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                alt="Despierta América" />
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title">Despierta América</h2>
+                            <p>We were featured on Despierta América, a popular morning show celebrating our authentic
+                                Dominican flavors.</p>
+                            <div class="card-actions justify-end">
+                                <a href="https://www.youtube.com/@DespiertaAmerica" class="btn btn-primary"
+                                    target="_blank">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-side bg-base-100 shadow-sm">
+                        <figure>
+                            <img src="https://library.rice.edu/sites/default/files/styles/wide/public/media-images/The-New-York-Times.png?itok=F-mv39bK"
+                                alt="New York Times" />
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title">New York Times</h2>
+                            <p>We were featured in the New York Times, highlighting our unique approach to baking and
+                                community engagement.</p>
+                            <div class="card-actions justify-end">
+                                <a href="https://www.nytimes.com/2020/07/21/dining/bake-sale-activism-racism.html"
+                                    class="btn btn-primary" target="_blank">Read</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-side bg-base-100 shadow-sm">
+                        <figure>
+                            <img src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781451628913/baking-with-the-cake-boss-9781451628913_lg.jpg"
+                                alt="JefeDeBizcocho" />
+                        </figure>
+                        <div class="card-body">
+                            <h2 class="card-title">Interview with JefeDeBizcocho</h2>
+                            <p>We were interviewed by JefeDeBizcocho, sharing insights into our baking journey and
+                                passion for Dominican flavors.</p>
+                            <div class="card-actions justify-end">
+                                <a href="https://www.instagram.com/buddyvalastro/?hl=en" class="btn btn-primary"
+                                    target="_blank">Watch</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATERING -->
+
+        <div class="tab-section" id="catering-section" style="display: none;">
+            <div class="location-content">
+                <div class="location-header">
+                    <h3 class="location-title">Catering Services</h3>
+                    <p
+                        style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 1rem auto 2rem; text-align: center; line-height: 1.6;">
+                        We do catering! Let AZÚCAR bring authentic Dominican flavors to your next event. From intimate
+                        gatherings to large celebrations,
+                        we offer a wide selection of our signature cakes, desserts, and savory treats in bulk
+                        quantities. Perfect for parties, corporate events,
+                        weddings, and special occasions.
+                    </p>
+                    <p style="font-size: 1rem; color: #f14d0c; font-weight: 600; margin-bottom: 2rem;">
+                        Contact us at (718) 555-0123 or (212) 555-0456 to place your catering order!
+                    </p>
+                </div>
+
+                <div class="location-cards" style="justify-content: center;">
+                    <div class="receipt-card" style="max-width: 700px; margin: 0 auto;">
+                        <h3 class="receipt-title">CATERING MENU - BULK PRICING</h3>
+                        <ul class="receipt-items">
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Dominican Cake</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Full Sheet (serves 40-50)</span>
+                                <span class="receipt-item-price">$180.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Half Sheet (serves 20-25)</span>
+                                <span class="receipt-item-price">$95.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Three Tier (serves 75-100)</span>
+                                <span class="receipt-item-price">$350.00</span>
+                            </li>
+
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Tres Leches</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Full Sheet (serves 40-50)</span>
+                                <span class="receipt-item-price">$200.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Half Sheet (serves 20-25)</span>
+                                <span class="receipt-item-price">$105.00</span>
+                            </li>
+
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Flan</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Large Pan (serves 30-35)</span>
+                                <span class="receipt-item-price">$120.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Individual Cups (per dozen)</span>
+                                <span class="receipt-item-price">$45.00</span>
+                            </li>
+
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Cupcakes</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">2 Dozen</span>
+                                <span class="receipt-item-price">$55.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">4 Dozen</span>
+                                <span class="receipt-item-price">$100.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">6 Dozen</span>
+                                <span class="receipt-item-price">$140.00</span>
+                            </li>
+
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Macarons</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">3 Dozen (assorted flavors)</span>
+                                <span class="receipt-item-price">$65.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">6 Dozen (assorted flavors)</span>
+                                <span class="receipt-item-price">$120.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">10 Dozen (assorted flavors)</span>
+                                <span class="receipt-item-price">$190.00</span>
+                            </li>
+
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Fritos Platter</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Small (30 pieces - assorted)</span>
+                                <span class="receipt-item-price">$85.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Medium (50 pieces - assorted)</span>
+                                <span class="receipt-item-price">$135.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Large (100 pieces - assorted)</span>
+                                <span class="receipt-item-price">$250.00</span>
+                            </li>
+
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Beverages (Bulk)</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Fresh Juice (1 gallon)</span>
+                                <span class="receipt-item-price">$35.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Dominican Soda (24-pack)</span>
+                                <span class="receipt-item-price">$60.00</span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;">
+                                <span class="receipt-item-name">Water (24-pack)</span>
+                                <span class="receipt-item-price">$25.00</span>
+                            </li>
+
+                            <li
+                                style="font-weight: bold; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid #333; font-size: 0.85rem; color: #666;">
+                                <span class="receipt-item-name" style="font-style: italic;">*Minimum order $100 |
+                                    48-hour advance notice required | Delivery available for additional fee</span>
+                                <span class="receipt-item-price"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gallery-modal" id="galleryModal">
+        <div class="gallery-modal-content">
+            <button class="gallery-modal-close" id="modalClose">&times;</button>
+            <img src="" alt="Gallery Image" id="modalImage">
+        </div>
+    </div>
+
+    <div class='wrapper'>
+        <svg class="transition" viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice">
+            <defs>
+                <linearGradient id="grad" x1="0" y1="0" x2="99" y2="99" gradientUnits="userSpaceOnUse">
+                    <stop offset="0.2" stop-color="rgb(255, 135, 9)" />
+                    <stop offset="0.7" stop-color="rgb(247, 189, 248)" />
+                </linearGradient>
+            </defs>
+            <path class="path" stroke="url(#grad)" fill="url(#grad)" stroke-width="2px"
+                vector-effect="non-scaling-stroke" d="M 0 100 V 100 Q 50 100 100 100 V 100 z" />
+        </svg>
+    </div>
+
+    <!-- GSAP Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+
+    <script>
+        // page loads to top of page
+        history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+
+        let path = document.querySelector(".path");
+        let title = document.querySelector(".fixed");
+        let subtitle = document.querySelector(".subtitle");
+        let tabs = document.querySelector(".tabs-container");
+        let tabContent = document.querySelector(".tab-content");
+
+        console.log("Elements found:", {
+            path: !!path,
+            title: !!title,
+            subtitle: !!subtitle,
+            tabs: !!tabs,
+            tabContent: !!tabContent
+        });
+
+        const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
+        const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
+
+        let tl = gsap.timeline();
+
+        tl.to(path, { attr: { d: start }, duration: 0.6, ease: "power2.in" })
+            .to(path, { attr: { d: end }, duration: 0.6, ease: "power2.out" })
+            .to(title, { top: "50%", duration: 0.4, ease: "power2.out" }, "-=0.4");
+
+        // Start with gradient visible, then hide it after 1 second
+        tl.seek(tl.duration());
+
+        setTimeout(() => {
+            console.log("Starting reverse animation");
+            tl.reverse();
+
+            // After the animation page appears
+            setTimeout(() => {
+                console.log("Fading in content");
+                gsap.to(subtitle, { opacity: 1, y: 10, duration: 1, ease: "power2.out" });
+                gsap.to(tabs, { opacity: 1, y: 10, duration: 1, delay: 0.5, ease: "power2.out" });
+                gsap.to(tabContent, {
+                    opacity: 1, y: 10, duration: 1, delay: 0.8, ease: "power2.out", onComplete: () => {
+                        console.log("Tab content animation complete");
+                        console.log("Tab content opacity:", window.getComputedStyle(tabContent).opacity);
+                        console.log("Tab content display:", window.getComputedStyle(tabContent).display);
+                        //Enable autoscroll when fully loaded
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                title.classList.add('active');
+            }, 1200);
+        }, 1000);
+
+        // 3D Card Effect
+        const card3d = document.querySelector('.hover-3d');
+        const figure = card3d.querySelector('figure');
+        let isHovering = false;
+
+        card3d.addEventListener('mouseenter', (e) => {
+            if (e.target === card3d || card3d.contains(e.target)) {
+                isHovering = true;
+            }
+        });
+
+        card3d.addEventListener('mousemove', (e) => {
+            if (!isHovering) return;
+
+            e.stopPropagation();
+
+            const rect = card3d.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
+                return;
+            }
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = (y - centerY) / 10;
+            const rotateY = (centerX - x) / 10;
+
+            figure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+        });
+
+        card3d.addEventListener('mouseleave', (e) => {
+            if (!card3d.contains(e.relatedTarget)) {
+                isHovering = false;
+                figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            }
+        });
+
+        // Gallery functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const galleryModal = document.getElementById('galleryModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                modalImage.src = img.src;
+                gsap.to(galleryModal, {
+                    opacity: 1,
+                    duration: 0.3,
+                    onStart: () => {
+                        galleryModal.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        function closeModal() {
+            gsap.to(galleryModal, {
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => {
+                    galleryModal.classList.remove('active');
+                }
+            });
+        }
+
+        modalClose.addEventListener('click', closeModal);
+        galleryModal.addEventListener('click', (e) => {
+            if (e.target === galleryModal) {
+                closeModal();
+            }
+        });
+
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab');
+        const tabSections = document.querySelectorAll('.tab-section');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('tab-active'));
+                button.classList.add('tab-active');
+                const tabName = button.getAttribute('data-tab');
+                tabSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                const selectedSection = document.getElementById(`${tabName}-section`);
+                if (selectedSection) {
+                    selectedSection.style.display = 'block';
+                }
+            });
+        });
+
+        // Carousel functionality
+        gsap.registerPlugin(Flip);
+        const carouselStates = {};
+        document.querySelectorAll('[data-carousel]').forEach(carouselContainer => {
+            const cards = carouselContainer.querySelectorAll('.card');
+            if (cards.length <= 3) {
+                const buttonsContainer = carouselContainer.parentElement.querySelector('.carousel-buttons');
+                if (buttonsContainer) {
+                    buttonsContainer.classList.add('hidden');
+                }
+            }
+        });
+
+        document.querySelectorAll('[data-action]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-target');
+                const action = btn.getAttribute('data-action');
+                if (carouselStates[target]) return;
+                carouselStates[target] = true;
+                const container = document.querySelector(`[data-carousel="${target}"]`);
+                updateCarousel(container, action === 'next');
+            });
+        });
+
+        function updateCarousel(container, forward) {
+            const cards = Array.from(container.querySelectorAll('.card'));
+            if (forward) {
+                const first = cards[0];
+                const newCard = document.createElement('div');
+                newCard.className = 'card bg-base-100 shadow-sm';
+                newCard.innerHTML = first.innerHTML;
+
+                // Fade out the first card
+                gsap.to(first, {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.3,
+                    onComplete: () => {
+                        container.appendChild(newCard);
+                        first.remove();
+                        gsap.fromTo(newCard,
+                            { opacity: 0, scale: 0.8 },
+                            {
+                                opacity: 1,
+                                scale: 1,
+                                duration: 0.3,
+                                onComplete: () => {
+                                    const target = container.getAttribute('data-carousel');
+                                    carouselStates[target] = false;
+                                }
+                            }
+                        );
+                    }
+                });
+            } else {
+                const last = cards[cards.length - 1];
+                const newCard = document.createElement('div');
+                newCard.className = 'card bg-base-100 shadow-sm';
+                newCard.innerHTML = last.innerHTML;
+
+                // Fade out the last card
+                gsap.to(last, {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.3,
+                    onComplete: () => {
+                        container.prepend(newCard);
+                        last.remove();
+                        gsap.fromTo(newCard,
+                            { opacity: 0, scale: 0.8 },
+                            {
+                                opacity: 1,
+                                scale: 1,
+                                duration: 0.3,
+                                onComplete: () => {
+                                    const target = container.getAttribute('data-carousel');
+                                    carouselStates[target] = false;
+                                }
+                            }
+                        );
+                    }
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
