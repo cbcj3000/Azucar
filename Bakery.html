@@ -20,16 +20,83 @@
         }
 
         .fixed {
-            position: fixed;
-            top: 5%;
+            position: absolute;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
             text-align: center;
             color: transparent;
-            z-index: 999;
+            z-index: 998;
             font-size: 5rem;
             font-family: "Special Gothic Expanded One", sans-serif;
             text-transform: uppercase;
+            margin-top: 0;
+        }
+
+        header.bakery-header {
+            position: fixed;
+            top: -15px;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1.2rem 0 0.7rem 0;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        .bakery-header .tabs {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 0;
+            margin: 0;
+            border-bottom: none;
+            transition: all 0.3s ease;
+            align-items: flex-end;
+            
+        }
+        .bakery-header .tab {
+            flex: 0 0 auto;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #c71550;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: none;
+            font-family: "Plus Jakarta Sans", sans-serif;
+            position: relative;
+            top: -0.2rem;
+        }
+
+        .bakery-header .tab:hover {
+            color: #be1c1c;
+            background: rgba(199, 21, 80, 0.05);
+        }
+        .bakery-header .tab.tab-active {
+            color: #f14d0c;
+            border-bottom-color: #ffe23c;
+        }
+        @media (max-width: 768px) {
+            .bakery-header .tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding: 0 10px;
+            }
+            .bakery-header .tabs::-webkit-scrollbar {
+                display: none;
+            }
+            .bakery-header .tab {
+                flex: 0 0 auto;
+            }
         }
 
         .fixed span:nth-child(1) {
@@ -178,7 +245,7 @@
 
         .subtitle {
             position: fixed;
-            top: 18%;
+            top: 23%;
             left: 50%;
             transform: translateX(-50%);
             font-style: italic;
@@ -883,31 +950,28 @@
 </head>
 
 <body>
-    <!-- Repeats because of the split effect -->
-    <h2 class="fixed braces">
-        AZÚCAR
-        <span>AZÚCAR</span>
-        <span>AZÚCAR</span>
-        <span>Baked with sabor</span>
-    </h2>
-
-    <h2 class="tagline">
-        Baked with sabor
-        <span>Baked with sabor</span>
-        <span>Baked with sabor</span>
-        <span>bringing sweetness to brooklyn</span>
-    </h2>
-
-    <p class="subtitle">Serving the community of brooklyn since 2009</p>
-    <div class="tabs-container">
-        <div role="tablist" class="tabs tabs-bordered">
+    <header class="bakery-header">
+        <div role="tablist" class="tabs">
             <a role="tab" class="tab tab-active" data-tab="home">Home</a>
             <a role="tab" class="tab" data-tab="bushwick">Bushwick</a>
             <a role="tab" class="tab" data-tab="washingtonheights">Washington Heights</a>
             <a role="tab" class="tab" data-tab="accomplishments">Accomplishments</a>
             <a role="tab" class="tab" data-tab="catering">Catering</a>
         </div>
-    </div>
+    </header>
+    <h2 class="fixed braces">
+        AZÚCAR
+        <span>AZÚCAR</span>
+        <span>AZÚCAR</span>
+        <span>Baked with sabor</span>
+    </h2>
+    <h2 class="tagline">
+        Baked with sabor
+        <span>Baked with sabor</span>
+        <span>Baked with sabor</span>
+        <span>bringing sweetness to brooklyn</span>
+    </h2>
+    <p class="subtitle">Serving the community of brooklyn since 2009</p>
 
     <!-- HOME -->
     <div class="tab-content">
@@ -2241,6 +2305,7 @@
         let subtitle = document.querySelector(".subtitle");
         let tabs = document.querySelector(".tabs-container");
         let tabContent = document.querySelector(".tab-content");
+        let bakeryHeader = document.querySelector(".bakery-header");
 
         console.log("Elements found:", {
             path: !!path,
@@ -2270,7 +2335,7 @@
             setTimeout(() => {
                 console.log("Fading in content");
                 gsap.to(subtitle, { opacity: 1, y: 10, duration: 1, ease: "power2.out" });
-                gsap.to(tabs, { opacity: 1, y: 10, duration: 1, delay: 0.5, ease: "power2.out" });
+                gsap.to(bakeryHeader, { opacity: 1, y: 10, duration: 1, delay: 0.5, ease: "power2.out" });
                 gsap.to(tabContent, {
                     opacity: 1, y: 10, duration: 1, delay: 0.8, ease: "power2.out", onComplete: () => {
                         console.log("Tab content animation complete");
@@ -2281,6 +2346,16 @@
                     }
                 });
                 title.classList.add('active');
+                // Animate title to its final position using GSAP for a smooth upward float
+                gsap.to(title, {
+                    top: '4.2rem',
+                    position: 'fixed',
+                    y: 0,
+                    transform: 'translateX(-50%)',
+                    duration: 0.6,
+                    ease: 'power2.inOut',
+                    delay: 0.08
+                });
             }, 1200);
         }, 1000);
 
