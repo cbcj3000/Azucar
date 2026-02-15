@@ -156,7 +156,7 @@
 
         body {
             overflow-x: hidden;
-            overflow-y: hidden;
+            overflow-y: auto;
             min-height: 100vh;
         }
 
@@ -244,7 +244,7 @@
         }
 
         .subtitle {
-            position: fixed;
+            position: absolute;
             top: 23%;
             left: 50%;
             transform: translateX(-50%);
@@ -266,21 +266,22 @@
             font-family: "Plus Jakarta Sans", sans-serif;
         }
 
-        .tab-content {
-            position: absolute;
-            top: 35%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
+        .main-sections {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 13.5rem;
+            margin-bottom: 3rem;
+        }
+        .main-card-section {
+            width: 90%;
             max-width: 1200px;
-            z-index: 1000;
-            opacity: 0;
-            display: block !important;
-            padding: 2rem;
-            padding-bottom: 4rem;
             background: #f5f5f5;
-            border-radius: 1rem;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+            margin-bottom: 2.5rem;
+            padding: 2.5rem 2rem 3.5rem 2rem;
         }
 
         body:has(.tab-content) {
@@ -959,8 +960,7 @@
             <a role="tab" class="tab" data-tab="catering">Catering</a>
         </div>
     </header>
-    <h2 class="fixed braces">
-        AZÚCAR
+    <h2 class="fixed braces" style="position: absolute;">AZÚCAR
         <span>AZÚCAR</span>
         <span>AZÚCAR</span>
         <span>Baked with sabor</span>
@@ -973,9 +973,8 @@
     </h2>
     <p class="subtitle">Serving the community of brooklyn since 2009</p>
 
-    <!-- HOME -->
-    <div class="tab-content">
-        <div class="tab-section" id="home-section">
+    <div class="main-sections">
+        <section class="main-card-section" id="home-section">
             <div class="about-content">
                 <h3 class="about-title">Our Story</h3>
                 <p class="about-text">AZÚCAR was born from a love of Dominican tradition and the joy of celebration.
@@ -1048,172 +1047,68 @@
                                 alt="Dominican cake" />
                         </figure>
                     </div>
+                
                 </div>
             </div>
-        </div>
-
-        <!-- BUSHWICK -->
-        <div class="tab-section" id="bushwick-section" style="display: none;">
+        </section>
+        <section class="main-card-section" id="bushwick-section">
             <div class="location-content">
                 <div class="location-header">
                     <h3 class="location-title">Bushwick</h3>
                     <p class="location-address">717 Knickerbocker Ave, Brooklyn, NY 11221</p>
                     <p class="location-phone">(718) 555-0123</p>
                 </div>
-
                 <div class="location-cards">
                     <div class="location-left-column">
                         <div class="hours-card">
                             <h2 class="neon-hours-title">Hours</h2>
                             <ul class="hours-list">
-                                <li>
-                                    <span class="hours-day">Monday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Tuesday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Wednesday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Thursday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Friday</span>
-                                    <span class="hours-time">7am - 9pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Saturday</span>
-                                    <span class="hours-time">8am - 9pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Sunday</span>
-                                    <span class="hours-time">8am - 7pm</span>
-                                </li>
+                                <li><span class="hours-day">Monday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Tuesday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Wednesday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Thursday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Friday</span><span class="hours-time">7am - 9pm</span></li>
+                                <li><span class="hours-day">Saturday</span><span class="hours-time">8am - 9pm</span></li>
+                                <li><span class="hours-day">Sunday</span><span class="hours-time">8am - 7pm</span></li>
                             </ul>
                         </div>
-
                         <div class="location-map">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.8662475897424!2d-73.91853892346188!3d40.70397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25c0a8d5b7e3d%3A0x7e1f3c8b9d5c7e3d!2s717%20Knickerbocker%20Ave%2C%20Brooklyn%2C%20NY%2011221!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus"
-                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.8662475897424!2d-73.91853892346188!3d40.70397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25c0a8d5b7e3d%3A0x7e1f3c8b9d5c7e3d!2s717%20Knickerbocker%20Ave%2C%20Brooklyn%2C%20NY%2011221!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
-
                     <div class="location-right-column">
                         <div class="receipt-card">
                             <h3 class="receipt-title">MENU</h3>
                             <ul class="receipt-items">
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Dominican Cake</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Slice</span>
-                                    <span class="receipt-item-price">$5.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">1/2 Pound</span>
-                                    <span class="receipt-item-price">$30.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Pound</span>
-                                    <span class="receipt-item-price">$50.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Two Tier</span>
-                                    <span class="receipt-item-price">$90.00</span>
-                                </li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Tres Leches</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Slice</span>
-                                    <span class="receipt-item-price">$6.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Small</span>
-                                    <span class="receipt-item-price">$20.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Large</span>
-                                    <span class="receipt-item-price">$35.00</span>
-                                </li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Flan</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Slice</span>
-                                    <span class="receipt-item-price">$4.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Pan</span>
-                                    <span class="receipt-item-price">$25.00</span>
-                                </li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Cupcakes</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Single</span>
-                                    <span class="receipt-item-price">$4.50</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">6-pack</span>
-                                    <span class="receipt-item-price">$23.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">12-pack</span>
-                                    <span class="receipt-item-price">$42.00</span>
-                                </li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Macarons</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Single</span>
-                                    <span class="receipt-item-price">$2.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">6-pack</span>
-                                    <span class="receipt-item-price">$10.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">12-pack</span>
-                                    <span class="receipt-item-price">$18.00</span>
-                                </li>
-
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">House Made Juices</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Small</span>
-                                    <span class="receipt-item-price">$7.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Large</span>
-                                    <span class="receipt-item-price">$9.00</span>
-                                </li>
-                                <li>
-                                    <span class="receipt-item-name">Fritos</span>
-                                    <span class="receipt-item-price">$3.50</span>
-                                </li>
-                                <li>
-                                    <span class="receipt-item-name">Dominican Soda(Country Club)</span>
-                                    <span class="receipt-item-price">$3.00</span>
-                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Dominican Cake</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$5.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">1/2 Pound</span><span class="receipt-item-price">$30.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pound</span><span class="receipt-item-price">$50.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Two Tier</span><span class="receipt-item-price">$90.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Tres Leches</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$6.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$20.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$35.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$4.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pan</span><span class="receipt-item-price">$25.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Cupcakes</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$4.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$23.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$42.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Macarons</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$2.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$10.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$18.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">House Made Juices</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$7.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$9.00</span></li>
+                                <li><span class="receipt-item-name">Fritos</span><span class="receipt-item-price">$3.50</span></li>
+                                <li><span class="receipt-item-name">Dominican Soda(Country Club)</span><span class="receipt-item-price">$3.00</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
                 <div class="menu-accordions" style="margin-top: 2rem;">
                     <div class="collapse bg-base-100">
                         <input type="radio" name="bushwick-accordion" />
@@ -1524,177 +1419,68 @@
                         </div>
                     </div>
                 </div>
+            
             </div>
-        </div>
-
-
-        <!-- WASHINGTON HEIGHTS -->
-        <div class="tab-section" id="washingtonheights-section" style="display: none;">
+        </section>
+        <section class="main-card-section" id="washingtonheights-section">
             <div class="location-content">
                 <div class="location-header">
                     <h3 class="location-title">Washington Heights</h3>
                     <p class="location-address">2220 Amsterdam Ave, New York, NY 10032</p>
                     <p class="location-phone">(212) 555-0456</p>
                 </div>
-
                 <div class="location-cards">
                     <div class="location-left-column">
                         <div class="hours-card">
                             <h2 class="neon-hours-title">Hours</h2>
                             <ul class="hours-list">
-                                <li>
-                                    <span class="hours-day">Monday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Tuesday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Wednesday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Thursday</span>
-                                    <span class="hours-time">7am - 8pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Friday</span>
-                                    <span class="hours-time">7am - 9pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Saturday</span>
-                                    <span class="hours-time">8am - 9pm</span>
-                                </li>
-                                <li>
-                                    <span class="hours-day">Sunday</span>
-                                    <span class="hours-time">8am - 7pm</span>
-                                </li>
+                                <li><span class="hours-day">Monday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Tuesday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Wednesday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Thursday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Friday</span><span class="hours-time">7am - 9pm</span></li>
+                                <li><span class="hours-day">Saturday</span><span class="hours-time">8am - 9pm</span></li>
+                                <li><span class="hours-day">Sunday</span><span class="hours-time">8am - 7pm</span></li>
                             </ul>
                         </div>
-
                         <div class="location-map">
-                            <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3017.8162475897424!2d-73.93853892346188!3d40.84397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f63f32b0b7e3%3A0x7e1f3c8b9d5c7e3d!2s2220%20Amsterdam%20Ave%2C%20New%20York%2C%20NY%2010032!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus"
-                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3017.8162475897424!2d-73.93853892346188!3d40.84397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f63f32b0b7e3%3A0x7e1f3c8b9d5c7e3d!2s2220%20Amsterdam%20Ave%2C%20New%20York%2C%20NY%2010032!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
-
                     <div class="location-right-column">
                         <div class="receipt-card">
                             <h3 class="receipt-title">MENU</h3>
                             <ul class="receipt-items">
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Dominican Cake</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Slice</span>
-                                    <span class="receipt-item-price">$5.50</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">1/2 Pound</span>
-                                    <span class="receipt-item-price">$32.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Pound</span>
-                                    <span class="receipt-item-price">$52.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Two Tier</span>
-                                    <span class="receipt-item-price">$95.00</span>
-                                </li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Tres Leches</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Slice</span>
-                                    <span class="receipt-item-price">$6.50</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Small</span>
-                                    <span class="receipt-item-price">$22.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Large</span>
-                                    <span class="receipt-item-price">$37.00</span>
-                                </li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Flan</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Slice</span>
-                                    <span class="receipt-item-price">$4.50</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Pan</span>
-                                    <span class="receipt-item-price">$27.00</span>
-                                </li>
-
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Cupcakes</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Single</span>
-                                    <span class="receipt-item-price">$4.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">6-pack</span>
-                                    <span class="receipt-item-price">$22.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">12-pack</span>
-                                    <span class="receipt-item-price">$40.00</span>
-                                </li>
-
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">Macarons</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Single</span>
-                                    <span class="receipt-item-price">$2.25</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">6-pack</span>
-                                    <span class="receipt-item-price">$11.00</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">12-pack</span>
-                                    <span class="receipt-item-price">$20.00</span>
-                                </li>
-
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
-                                    <span class="receipt-item-name">House Made Juices</span>
-                                    <span class="receipt-item-price"></span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Small</span>
-                                    <span class="receipt-item-price">$7.50</span>
-                                </li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                    <span class="receipt-item-name">Large</span>
-                                    <span class="receipt-item-price">$9.50</span>
-                                </li>
-                                <li>
-                                    <span class="receipt-item-name">Fritos</span>
-                                    <span class="receipt-item-price">$3.50</span>
-                                </li>
-                                <li>
-                                    <span class="receipt-item-name">Dominican Soda(Country Club)</span>
-                                    <span class="receipt-item-price">$3.00</span>
-                                </li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Dominican Cake</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$5.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">1/2 Pound</span><span class="receipt-item-price">$32.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pound</span><span class="receipt-item-price">$52.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Two Tier</span><span class="receipt-item-price">$95.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Tres Leches</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$6.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$22.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$37.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$4.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pan</span><span class="receipt-item-price">$27.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Cupcakes</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$4.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$22.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$40.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Macarons</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$2.25</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$11.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$20.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">House Made Juices</span><span class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$7.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$9.50</span></li>
+                                <li><span class="receipt-item-name">Fritos</span><span class="receipt-item-price">$3.50</span></li>
+                                <li><span class="receipt-item-name">Dominican Soda(Country Club)</span><span class="receipt-item-price">$3.00</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-
-
-                <div class="menu-accordions" style="margin-top: 2rem;">
+                 <div class="menu-accordions" style="margin-top: 2rem;">
                     <div class="collapse bg-base-100">
                         <input type="radio" name="washingtonheights-accordion" />
                         <div class="collapse-title font-semibold">Cakes</div>
@@ -1999,282 +1785,105 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- ACCOMPLISHMENTS -->
-
-        <div class="tab-section" id="accomplishments-section" style="display: none;">
+        </section>
+        <section class="main-card-section" id="accomplishments-section">
             <div class="grid grid-cols-3 gap-8 p-8">
-                <!-- Left Side: Testimonials -->
                 <div class="testimonials col-span-1">
-                    <!-- Phone Mockup -->
                     <div class="flex justify-center mb-8">
                         <div class="mockup-phone">
                             <div class="camera"></div>
                             <div class="display">
-                                <div
-                                    class="artboard artboard-demo phone-1 bg-neutral-900 text-white flex flex-col justify-center items-center p-4">
-                                    <div class="chat chat-start w-full mb-4">
-                                        <div class="chat-bubble">
-                                            The tres leches cake is absolutely divine! Best I've ever had.
-                                        </div>
-                                    </div>
-                                    <div class="chat chat-end w-full mb-4">
-                                        <div class="chat-bubble">Amazing authentic Dominican flavors!</div>
-                                    </div>
-                                    <div class="chat chat-start w-full mb-4">
-                                        <div class="chat-bubble">
-                                            <div class="rating">
-                                                <input type="radio" name="rating-stars"
-                                                    class="mask mask-star-2 bg-orange-400" disabled />
-                                                <input type="radio" name="rating-stars"
-                                                    class="mask mask-star-2 bg-orange-400" disabled />
-                                                <input type="radio" name="rating-stars"
-                                                    class="mask mask-star-2 bg-orange-400" disabled />
-                                                <input type="radio" name="rating-stars"
-                                                    class="mask mask-star-2 bg-orange-400" disabled />
-                                                <input type="radio" name="rating-stars"
-                                                    class="mask mask-star-2 bg-orange-400" checked disabled />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat chat-end w-full">
-                                        <div class="chat-bubble">Will definitely be back for more!</div>
-                                    </div>
+                                <div class="artboard artboard-demo phone-1 bg-neutral-900 text-white flex flex-col justify-center items-center p-4">
+                                    <div class="chat chat-start w-full mb-4"><div class="chat-bubble">The tres leches cake is absolutely divine! Best I've ever had.</div></div>
+                                    <div class="chat chat-end w-full mb-4"><div class="chat-bubble">Amazing authentic Dominican flavors!</div></div>
+                                    <div class="chat chat-start w-full mb-4"><div class="chat-bubble"><div class="rating"><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" checked disabled /></div></div></div>
+                                    <div class="chat chat-end w-full"><div class="chat-bubble">Will definitely be back for more!</div></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Side: Accomplishment Cards -->
                 <div class="achievements flex flex-col gap-4 col-span-2">
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure>
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/1/13/James_Beard_Foundation_Award_for_Excellence_medallion.jpg"
-                                alt="James Beard Award" />
-                        </figure>
+                        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/James_Beard_Foundation_Award_for_Excellence_medallion.jpg" alt="James Beard Award" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">James Beard Award for Excellence</h2>
-                            <p>In 2024 we received the James Beard Award for Excellence which is a prestigious
-                                recognition in the culinary world.</p>
-                            <div class="card-actions justify-end">
-                                <!-- <button class="btn btn-primary">Article</button> -->
-                            </div>
+                            <p>In 2024 we received the James Beard Award for Excellence which is a prestigious recognition in the culinary world.</p>
+                            <div class="card-actions justify-end"></div>
                         </div>
                     </div>
-
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure>
-                            <img src="https://m.media-amazon.com/images/M/MV5BYjJhZjA5YmMtNmRkOC00N2QzLWJhZjUtNjZlMWRjZWE0NjYwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
-                                alt="Despierta América" />
-                        </figure>
+                        <figure><img src="https://m.media-amazon.com/images/M/MV5BYjJhZjA5YmMtNmRkOC00N2QzLWJhZjUtNjZlMWRjZWE0NjYwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Despierta América" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">Despierta América</h2>
-                            <p>We were featured on Despierta América, a popular morning show celebrating our authentic
-                                Dominican flavors.</p>
-                            <div class="card-actions justify-end">
-                                <a href="https://www.youtube.com/@DespiertaAmerica" class="btn btn-primary"
-                                    target="_blank">Watch</a>
-                            </div>
+                            <p>We were featured on Despierta América, a popular morning show celebrating our authentic Dominican flavors.</p>
+                            <div class="card-actions justify-end"><a href="https://www.youtube.com/@DespiertaAmerica" class="btn btn-primary" target="_blank">Watch</a></div>
                         </div>
                     </div>
-
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure>
-                            <img src="https://library.rice.edu/sites/default/files/styles/wide/public/media-images/The-New-York-Times.png?itok=F-mv39bK"
-                                alt="New York Times" />
-                        </figure>
+                        <figure><img src="https://library.rice.edu/sites/default/files/styles/wide/public/media-images/The-New-York-Times.png?itok=F-mv39bK" alt="New York Times" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">New York Times</h2>
-                            <p>We were featured in the New York Times, highlighting our unique approach to baking and
-                                community engagement.</p>
-                            <div class="card-actions justify-end">
-                                <a href="https://www.nytimes.com/2020/07/21/dining/bake-sale-activism-racism.html"
-                                    class="btn btn-primary" target="_blank">Read</a>
-                            </div>
+                            <p>We were featured in the New York Times, highlighting our unique approach to baking and community engagement.</p>
+                            <div class="card-actions justify-end"><a href="https://www.nytimes.com/2020/07/21/dining/bake-sale-activism-racism.html" class="btn btn-primary" target="_blank">Read</a></div>
                         </div>
                     </div>
-
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure>
-                            <img src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781451628913/baking-with-the-cake-boss-9781451628913_lg.jpg"
-                                alt="JefeDeBizcocho" />
-                        </figure>
+                        <figure><img src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781451628913/baking-with-the-cake-boss-9781451628913_lg.jpg" alt="JefeDeBizcocho" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">Interview with JefeDeBizcocho</h2>
-                            <p>We were interviewed by JefeDeBizcocho, sharing insights into our baking journey and
-                                passion for Dominican flavors.</p>
-                            <div class="card-actions justify-end">
-                                <a href="https://www.instagram.com/buddyvalastro/?hl=en" class="btn btn-primary"
-                                    target="_blank">Watch</a>
-                            </div>
+                            <p>We were interviewed by JefeDeBizcocho, sharing insights into our baking journey and passion for Dominican flavors.</p>
+                            <div class="card-actions justify-end"><a href="https://www.instagram.com/buddyvalastro/?hl=en" class="btn btn-primary" target="_blank">Watch</a></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- CATERING -->
-
-        <div class="tab-section" id="catering-section" style="display: none;">
+        </section>
+        <section class="main-card-section" id="catering-section">
             <div class="location-content">
                 <div class="location-header">
                     <h3 class="location-title">Catering Services</h3>
-                    <p
-                        style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 1rem auto 2rem; text-align: center; line-height: 1.6;">
-                        We do catering! Let AZÚCAR bring authentic Dominican flavors to your next event. From intimate
-                        gatherings to large celebrations,
-                        we offer a wide selection of our signature cakes, desserts, and savory treats in bulk
-                        quantities. Perfect for parties, corporate events,
-                        weddings, and special occasions.
-                    </p>
-                    <p style="font-size: 1rem; color: #f14d0c; font-weight: 600; margin-bottom: 2rem;">
-                        Contact us at (718) 555-0123 or (212) 555-0456 to place your catering order!
-                    </p>
+                    <p style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 1rem auto 2rem; text-align: center; line-height: 1.6;">We do catering! Let AZÚCAR bring authentic Dominican flavors to your next event. From intimate gatherings to large celebrations, we offer a wide selection of our signature cakes, desserts, and savory treats in bulk quantities. Perfect for parties, corporate events, weddings, and special occasions.</p>
+                    <p style="font-size: 1rem; color: #f14d0c; font-weight: 600; margin-bottom: 2rem;">Contact us at (718) 555-0123 or (212) 555-0456 to place your catering order!</p>
                 </div>
-
                 <div class="location-cards" style="justify-content: center;">
                     <div class="receipt-card" style="max-width: 700px; margin: 0 auto;">
                         <h3 class="receipt-title">CATERING MENU - BULK PRICING</h3>
                         <ul class="receipt-items">
-                            <li
-                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Dominican Cake</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Full Sheet (serves 40-50)</span>
-                                <span class="receipt-item-price">$180.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Half Sheet (serves 20-25)</span>
-                                <span class="receipt-item-price">$95.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Three Tier (serves 75-100)</span>
-                                <span class="receipt-item-price">$350.00</span>
-                            </li>
-
-                            <li
-                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Tres Leches</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Full Sheet (serves 40-50)</span>
-                                <span class="receipt-item-price">$200.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Half Sheet (serves 20-25)</span>
-                                <span class="receipt-item-price">$105.00</span>
-                            </li>
-
-                            <li
-                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Flan</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Large Pan (serves 30-35)</span>
-                                <span class="receipt-item-price">$120.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Individual Cups (per dozen)</span>
-                                <span class="receipt-item-price">$45.00</span>
-                            </li>
-
-                            <li
-                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Cupcakes</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">2 Dozen</span>
-                                <span class="receipt-item-price">$55.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">4 Dozen</span>
-                                <span class="receipt-item-price">$100.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">6 Dozen</span>
-                                <span class="receipt-item-price">$140.00</span>
-                            </li>
-
-                            <li
-                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Macarons</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">3 Dozen (assorted flavors)</span>
-                                <span class="receipt-item-price">$65.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">6 Dozen (assorted flavors)</span>
-                                <span class="receipt-item-price">$120.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">10 Dozen (assorted flavors)</span>
-                                <span class="receipt-item-price">$190.00</span>
-                            </li>
-
-                            <li
-                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Fritos Platter</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Small (30 pieces - assorted)</span>
-                                <span class="receipt-item-price">$85.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Medium (50 pieces - assorted)</span>
-                                <span class="receipt-item-price">$135.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Large (100 pieces - assorted)</span>
-                                <span class="receipt-item-price">$250.00</span>
-                            </li>
-
-                            <li
-                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Beverages (Bulk)</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Fresh Juice (1 gallon)</span>
-                                <span class="receipt-item-price">$35.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Dominican Soda (24-pack)</span>
-                                <span class="receipt-item-price">$60.00</span>
-                            </li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;">
-                                <span class="receipt-item-name">Water (24-pack)</span>
-                                <span class="receipt-item-price">$25.00</span>
-                            </li>
-
-                            <li
-                                style="font-weight: bold; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid #333; font-size: 0.85rem; color: #666;">
-                                <span class="receipt-item-name" style="font-style: italic;">*Minimum order $100 |
-                                    48-hour advance notice required | Delivery available for additional fee</span>
-                                <span class="receipt-item-price"></span>
-                            </li>
+                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Dominican Cake</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full Sheet (serves 40-50)</span><span class="receipt-item-price">$180.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half Sheet (serves 20-25)</span><span class="receipt-item-price">$95.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Three Tier (serves 75-100)</span><span class="receipt-item-price">$350.00</span></li>
+                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Tres Leches</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full Sheet (serves 40-50)</span><span class="receipt-item-price">$200.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half Sheet (serves 20-25)</span><span class="receipt-item-price">$105.00</span></li>
+                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large Pan (serves 30-35)</span><span class="receipt-item-price">$120.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Individual Cups (per dozen)</span><span class="receipt-item-price">$45.00</span></li>
+                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Cupcakes</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">2 Dozen</span><span class="receipt-item-price">$55.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">4 Dozen</span><span class="receipt-item-price">$100.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6 Dozen</span><span class="receipt-item-price">$140.00</span></li>
+                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Macarons</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">3 Dozen (assorted flavors)</span><span class="receipt-item-price">$65.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6 Dozen (assorted flavors)</span><span class="receipt-item-price">$120.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">10 Dozen (assorted flavors)</span><span class="receipt-item-price">$190.00</span></li>
+                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Fritos Platter</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small (30 pieces - assorted)</span><span class="receipt-item-price">$85.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Medium (50 pieces - assorted)</span><span class="receipt-item-price">$135.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large (100 pieces - assorted)</span><span class="receipt-item-price">$250.00</span></li>
+                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Beverages (Bulk)</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Fresh Juice (1 gallon)</span><span class="receipt-item-price">$35.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Dominican Soda (24-pack)</span><span class="receipt-item-price">$60.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Water (24-pack)</span><span class="receipt-item-price">$25.00</span></li>
+                            <li style="font-weight: bold; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid #333; font-size: 0.85rem; color: #666;"><span class="receipt-item-name" style="font-style: italic;">*Minimum order $100 | 48-hour advance notice required | Delivery available for additional fee</span><span class="receipt-item-price"></span></li>
                         </ul>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
-
-    <div class="gallery-modal" id="galleryModal">
-        <div class="gallery-modal-content">
-            <button class="gallery-modal-close" id="modalClose">&times;</button>
-            <img src="" alt="Gallery Image" id="modalImage">
-        </div>
-    </div>
+                        
 
     <div class='wrapper'>
         <svg class="transition" viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice">
@@ -2336,20 +1945,24 @@
                 console.log("Fading in content");
                 gsap.to(subtitle, { opacity: 1, y: 10, duration: 1, ease: "power2.out" });
                 gsap.to(bakeryHeader, { opacity: 1, y: 10, duration: 1, delay: 0.5, ease: "power2.out" });
-                gsap.to(tabContent, {
-                    opacity: 1, y: 10, duration: 1, delay: 0.8, ease: "power2.out", onComplete: () => {
-                        console.log("Tab content animation complete");
-                        console.log("Tab content opacity:", window.getComputedStyle(tabContent).opacity);
-                        console.log("Tab content display:", window.getComputedStyle(tabContent).display);
-                        //Enable autoscroll when fully loaded
-                        document.body.style.overflow = 'auto';
-                    }
-                });
+                if (tabContent) {
+                    gsap.to(tabContent, {
+                        opacity: 1, y: 10, duration: 1, delay: 0.8, ease: "power2.out", onComplete: () => {
+                            console.log("Tab content animation complete");
+                            console.log("Tab content opacity:", window.getComputedStyle(tabContent).opacity);
+                            console.log("Tab content display:", window.getComputedStyle(tabContent).display);
+                            //Enable autoscroll when fully loaded
+                            document.body.style.overflow = 'auto';
+                        }
+                    });
+                } else {
+                    document.body.style.overflow = 'auto';
+                }
                 title.classList.add('active');
                 // Animate title to its final position using GSAP for a smooth upward float
                 gsap.to(title, {
                     top: '4.2rem',
-                    position: 'fixed',
+                    position: 'absolute',
                     y: 0,
                     transform: 'translateX(-50%)',
                     duration: 0.6,
@@ -2436,24 +2049,62 @@
             }
         });
 
-        // Tab switching functionality
-        const tabButtons = document.querySelectorAll('.tab');
-        const tabSections = document.querySelectorAll('.tab-section');
+        // Tab Navigation: Judo-style scroll & highlight
+        const navTabs = document.querySelectorAll('.tab');
+        const sectionIds = [
+            'home-section',
+            'bushwick-section',
+            'washingtonheights-section',
+            'accomplishments-section',
+            'catering-section'
+        ];
+        const mainHeader = document.querySelector('.bakery-header');
+        const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                tabButtons.forEach(btn => btn.classList.remove('tab-active'));
-                button.classList.add('tab-active');
-                const tabName = button.getAttribute('data-tab');
-                tabSections.forEach(section => {
-                    section.style.display = 'none';
-                });
-                const selectedSection = document.getElementById(`${tabName}-section`);
-                if (selectedSection) {
-                    selectedSection.style.display = 'block';
+        navTabs.forEach((tab, idx) => {
+            tab.addEventListener('click', function (e) {
+                e.preventDefault();
+                const sectionId = sectionIds[idx];
+                const section = document.getElementById(sectionId);
+                console.log('Tab clicked:', sectionId, 'Index:', idx);
+                if (section) {
+                    const sectionTop = section.getBoundingClientRect().top + window.scrollY - headerHeight - 10;
+                    console.log('Scrolling to:', sectionId, 'Top:', sectionTop, 'HeaderHeight:', headerHeight);
+                    window.scrollTo({
+                        top: sectionTop,
+                        behavior: 'smooth'
+                    });
+                    navTabs.forEach(t => t.classList.remove('tab-active'));
+                    tab.classList.add('tab-active');
+                } else {
+                    console.warn('Section not found:', sectionId);
                 }
             });
         });
+
+        // Highlight active tab on scroll
+        function highlightActiveTab() {
+            let scrollY = window.scrollY || window.pageYOffset;
+            let buffer = headerHeight + 20;
+            let activeIndex = 0;
+            for (let i = 0; i < sectionIds.length; i++) {
+                const section = document.getElementById(sectionIds[i]);
+                if (section) {
+                    const top = section.offsetTop - buffer;
+                    const bottom = top + section.offsetHeight;
+                    if (scrollY >= top && scrollY < bottom) {
+                        activeIndex = i;
+                        break;
+                    }
+                }
+            }
+            navTabs.forEach((tab, idx) => {
+                tab.classList.toggle('tab-active', idx === activeIndex);
+            });
+            console.log('Active section:', sectionIds[activeIndex]);
+        }
+        window.addEventListener('scroll', highlightActiveTab);
+        window.addEventListener('load', highlightActiveTab);
 
         // Carousel functionality
         gsap.registerPlugin(Flip);
