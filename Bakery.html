@@ -46,6 +46,7 @@
             opacity: 0;
             transition: opacity 0.5s, transform 0.5s;
         }
+
         .bakery-header .tabs {
             display: flex;
             justify-content: center;
@@ -55,8 +56,9 @@
             border-bottom: none;
             transition: all 0.3s ease;
             align-items: flex-end;
-            
+
         }
+
         .bakery-header .tab {
             flex: 0 0 auto;
             font-size: 1rem;
@@ -78,10 +80,12 @@
             color: #be1c1c;
             background: rgba(199, 21, 80, 0.05);
         }
+
         .bakery-header .tab.tab-active {
             color: #f14d0c;
             border-bottom-color: #ffe23c;
         }
+
         @media (max-width: 768px) {
             .bakery-header .tabs {
                 justify-content: flex-start;
@@ -91,9 +95,11 @@
                 scrollbar-width: none;
                 padding: 0 10px;
             }
+
             .bakery-header .tabs::-webkit-scrollbar {
                 display: none;
             }
+
             .bakery-header .tab {
                 flex: 0 0 auto;
             }
@@ -161,11 +167,16 @@
         }
 
         .wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             pointer-events: none;
+            z-index: 2001;
         }
 
         .transition {
@@ -274,12 +285,13 @@
             margin-top: 13.5rem;
             margin-bottom: 3rem;
         }
+
         .main-card-section {
             width: 90%;
             max-width: 1200px;
             background: #f5f5f5;
             border-radius: 1.2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.10);
             margin-bottom: 2.5rem;
             padding: 2.5rem 2rem 3.5rem 2rem;
         }
@@ -950,22 +962,22 @@
     </style>
 </head>
 
-<body>
+<body style="overflow-y: hidden;">
     <header class="bakery-header">
         <div role="tablist" class="tabs">
-            <a role="tab" class="tab tab-active" data-tab="home">Home</a>
-            <a role="tab" class="tab" data-tab="bushwick">Bushwick</a>
-            <a role="tab" class="tab" data-tab="washingtonheights">Washington Heights</a>
-            <a role="tab" class="tab" data-tab="accomplishments">Accomplishments</a>
-            <a role="tab" class="tab" data-tab="catering">Catering</a>
+            <a role="tab" class="tab tab-active" data-section="home-section">Home</a>
+            <a role="tab" class="tab" data-section="bushwick-section">Bushwick</a>
+            <a role="tab" class="tab" data-section="washingtonheights-section">Washington Heights</a>
+            <a role="tab" class="tab" data-section="accomplishments-section">Accomplishments</a>
+            <a role="tab" class="tab" data-section="catering-section">Catering</a>
         </div>
     </header>
-    <h2 class="fixed braces" style="position: absolute;">AZÚCAR
+    <h2 class="fixed braces" style="position: absolute; z-index: 10000;">AZÚCAR
         <span>AZÚCAR</span>
         <span>AZÚCAR</span>
         <span>Baked with sabor</span>
     </h2>
-    <h2 class="tagline">
+    <h2 class="tagline" style="position: relative; z-index: 10000;">
         Baked with sabor
         <span>Baked with sabor</span>
         <span>Baked with sabor</span>
@@ -973,7 +985,7 @@
     </h2>
     <p class="subtitle">Serving the community of brooklyn since 2009</p>
 
-    <div class="main-sections">
+    <div class="main-sections" style="opacity: 0; transition: opacity 1.7s;">
         <section class="main-card-section" id="home-section">
             <div class="about-content">
                 <h3 class="about-title">Our Story</h3>
@@ -1047,7 +1059,7 @@
                                 alt="Dominican cake" />
                         </figure>
                     </div>
-                
+
                 </div>
             </div>
         </section>
@@ -1065,46 +1077,97 @@
                             <ul class="hours-list">
                                 <li><span class="hours-day">Monday</span><span class="hours-time">7am - 8pm</span></li>
                                 <li><span class="hours-day">Tuesday</span><span class="hours-time">7am - 8pm</span></li>
-                                <li><span class="hours-day">Wednesday</span><span class="hours-time">7am - 8pm</span></li>
-                                <li><span class="hours-day">Thursday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Wednesday</span><span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li><span class="hours-day">Thursday</span><span class="hours-time">7am - 8pm</span>
+                                </li>
                                 <li><span class="hours-day">Friday</span><span class="hours-time">7am - 9pm</span></li>
-                                <li><span class="hours-day">Saturday</span><span class="hours-time">8am - 9pm</span></li>
+                                <li><span class="hours-day">Saturday</span><span class="hours-time">8am - 9pm</span>
+                                </li>
                                 <li><span class="hours-day">Sunday</span><span class="hours-time">8am - 7pm</span></li>
                             </ul>
                         </div>
                         <div class="location-map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.8662475897424!2d-73.91853892346188!3d40.70397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25c0a8d5b7e3d%3A0x7e1f3c8b9d5c7e3d!2s717%20Knickerbocker%20Ave%2C%20Brooklyn%2C%20NY%2011221!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.8662475897424!2d-73.91853892346188!3d40.70397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25c0a8d5b7e3d%3A0x7e1f3c8b9d5c7e3d!2s717%20Knickerbocker%20Ave%2C%20Brooklyn%2C%20NY%2011221!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                     <div class="location-right-column">
                         <div class="receipt-card">
                             <h3 class="receipt-title">MENU</h3>
                             <ul class="receipt-items">
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Dominican Cake</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$5.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">1/2 Pound</span><span class="receipt-item-price">$30.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pound</span><span class="receipt-item-price">$50.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Two Tier</span><span class="receipt-item-price">$90.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Tres Leches</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$6.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$20.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$35.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$4.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pan</span><span class="receipt-item-price">$25.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Cupcakes</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$4.50</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$23.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$42.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Macarons</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$2.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$10.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$18.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">House Made Juices</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$7.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$9.00</span></li>
-                                <li><span class="receipt-item-name">Fritos</span><span class="receipt-item-price">$3.50</span></li>
-                                <li><span class="receipt-item-name">Dominican Soda(Country Club)</span><span class="receipt-item-price">$3.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Dominican Cake</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Slice</span><span
+                                        class="receipt-item-price">$5.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">1/2
+                                        Pound</span><span class="receipt-item-price">$30.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Pound</span><span
+                                        class="receipt-item-price">$50.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Two
+                                        Tier</span><span class="receipt-item-price">$90.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Tres Leches</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Slice</span><span
+                                        class="receipt-item-price">$6.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Small</span><span
+                                        class="receipt-item-price">$20.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Large</span><span
+                                        class="receipt-item-price">$35.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Slice</span><span
+                                        class="receipt-item-price">$4.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Pan</span><span
+                                        class="receipt-item-price">$25.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Cupcakes</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Single</span><span
+                                        class="receipt-item-price">$4.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">6-pack</span><span
+                                        class="receipt-item-price">$23.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">12-pack</span><span
+                                        class="receipt-item-price">$42.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Macarons</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Single</span><span
+                                        class="receipt-item-price">$2.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">6-pack</span><span
+                                        class="receipt-item-price">$10.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">12-pack</span><span
+                                        class="receipt-item-price">$18.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">House Made Juices</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Small</span><span
+                                        class="receipt-item-price">$7.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Large</span><span
+                                        class="receipt-item-price">$9.00</span></li>
+                                <li><span class="receipt-item-name">Fritos</span><span
+                                        class="receipt-item-price">$3.50</span></li>
+                                <li><span class="receipt-item-name">Dominican Soda(Country Club)</span><span
+                                        class="receipt-item-price">$3.00</span></li>
                             </ul>
                         </div>
                     </div>
@@ -1419,7 +1482,7 @@
                         </div>
                     </div>
                 </div>
-            
+
             </div>
         </section>
         <section class="main-card-section" id="washingtonheights-section">
@@ -1436,51 +1499,102 @@
                             <ul class="hours-list">
                                 <li><span class="hours-day">Monday</span><span class="hours-time">7am - 8pm</span></li>
                                 <li><span class="hours-day">Tuesday</span><span class="hours-time">7am - 8pm</span></li>
-                                <li><span class="hours-day">Wednesday</span><span class="hours-time">7am - 8pm</span></li>
-                                <li><span class="hours-day">Thursday</span><span class="hours-time">7am - 8pm</span></li>
+                                <li><span class="hours-day">Wednesday</span><span class="hours-time">7am - 8pm</span>
+                                </li>
+                                <li><span class="hours-day">Thursday</span><span class="hours-time">7am - 8pm</span>
+                                </li>
                                 <li><span class="hours-day">Friday</span><span class="hours-time">7am - 9pm</span></li>
-                                <li><span class="hours-day">Saturday</span><span class="hours-time">8am - 9pm</span></li>
+                                <li><span class="hours-day">Saturday</span><span class="hours-time">8am - 9pm</span>
+                                </li>
                                 <li><span class="hours-day">Sunday</span><span class="hours-time">8am - 7pm</span></li>
                             </ul>
                         </div>
                         <div class="location-map">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3017.8162475897424!2d-73.93853892346188!3d40.84397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f63f32b0b7e3%3A0x7e1f3c8b9d5c7e3d!2s2220%20Amsterdam%20Ave%2C%20New%20York%2C%20NY%2010032!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3017.8162475897424!2d-73.93853892346188!3d40.84397397139157!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2f63f32b0b7e3%3A0x7e1f3c8b9d5c7e3d!2s2220%20Amsterdam%20Ave%2C%20New%20York%2C%20NY%2010032!5e0!3m2!1sen!2sus!4v1706227200000!5m2!1sen!2sus"
+                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                     <div class="location-right-column">
                         <div class="receipt-card">
                             <h3 class="receipt-title">MENU</h3>
                             <ul class="receipt-items">
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Dominican Cake</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$5.50</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">1/2 Pound</span><span class="receipt-item-price">$32.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pound</span><span class="receipt-item-price">$52.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Two Tier</span><span class="receipt-item-price">$95.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Tres Leches</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$6.50</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$22.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$37.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Slice</span><span class="receipt-item-price">$4.50</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Pan</span><span class="receipt-item-price">$27.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Cupcakes</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$4.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$22.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$40.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">Macarons</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Single</span><span class="receipt-item-price">$2.25</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6-pack</span><span class="receipt-item-price">$11.00</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">12-pack</span><span class="receipt-item-price">$20.00</span></li>
-                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;"><span class="receipt-item-name">House Made Juices</span><span class="receipt-item-price"></span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small</span><span class="receipt-item-price">$7.50</span></li>
-                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large</span><span class="receipt-item-price">$9.50</span></li>
-                                <li><span class="receipt-item-name">Fritos</span><span class="receipt-item-price">$3.50</span></li>
-                                <li><span class="receipt-item-name">Dominican Soda(Country Club)</span><span class="receipt-item-price">$3.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Dominican Cake</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Slice</span><span
+                                        class="receipt-item-price">$5.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">1/2
+                                        Pound</span><span class="receipt-item-price">$32.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Pound</span><span
+                                        class="receipt-item-price">$52.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Two
+                                        Tier</span><span class="receipt-item-price">$95.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Tres Leches</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Slice</span><span
+                                        class="receipt-item-price">$6.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Small</span><span
+                                        class="receipt-item-price">$22.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Large</span><span
+                                        class="receipt-item-price">$37.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span>
+                                </li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Slice</span><span
+                                        class="receipt-item-price">$4.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Pan</span><span
+                                        class="receipt-item-price">$27.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Cupcakes</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Single</span><span
+                                        class="receipt-item-price">$4.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">6-pack</span><span
+                                        class="receipt-item-price">$22.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">12-pack</span><span
+                                        class="receipt-item-price">$40.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">Macarons</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Single</span><span
+                                        class="receipt-item-price">$2.25</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">6-pack</span><span
+                                        class="receipt-item-price">$11.00</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">12-pack</span><span
+                                        class="receipt-item-price">$20.00</span></li>
+                                <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
+                                    <span class="receipt-item-name">House Made Juices</span><span
+                                        class="receipt-item-price"></span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Small</span><span
+                                        class="receipt-item-price">$7.50</span></li>
+                                <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                        class="receipt-item-name">Large</span><span
+                                        class="receipt-item-price">$9.50</span></li>
+                                <li><span class="receipt-item-name">Fritos</span><span
+                                        class="receipt-item-price">$3.50</span></li>
+                                <li><span class="receipt-item-name">Dominican Soda(Country Club)</span><span
+                                        class="receipt-item-price">$3.00</span></li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                 <div class="menu-accordions" style="margin-top: 2rem;">
+                <div class="menu-accordions" style="margin-top: 2rem;">
                     <div class="collapse bg-base-100">
                         <input type="radio" name="washingtonheights-accordion" />
                         <div class="collapse-title font-semibold">Cakes</div>
@@ -1793,11 +1907,32 @@
                         <div class="mockup-phone">
                             <div class="camera"></div>
                             <div class="display">
-                                <div class="artboard artboard-demo phone-1 bg-neutral-900 text-white flex flex-col justify-center items-center p-4">
-                                    <div class="chat chat-start w-full mb-4"><div class="chat-bubble">The tres leches cake is absolutely divine! Best I've ever had.</div></div>
-                                    <div class="chat chat-end w-full mb-4"><div class="chat-bubble">Amazing authentic Dominican flavors!</div></div>
-                                    <div class="chat chat-start w-full mb-4"><div class="chat-bubble"><div class="rating"><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" disabled /><input type="radio" name="rating-stars" class="mask mask-star-2 bg-orange-400" checked disabled /></div></div></div>
-                                    <div class="chat chat-end w-full"><div class="chat-bubble">Will definitely be back for more!</div></div>
+                                <div
+                                    class="artboard artboard-demo phone-1 bg-neutral-900 text-white flex flex-col justify-center items-center p-4">
+                                    <div class="chat chat-start w-full mb-4">
+                                        <div class="chat-bubble">The tres leches cake is absolutely divine! Best I've
+                                            ever had.</div>
+                                    </div>
+                                    <div class="chat chat-end w-full mb-4">
+                                        <div class="chat-bubble">Amazing authentic Dominican flavors!</div>
+                                    </div>
+                                    <div class="chat chat-start w-full mb-4">
+                                        <div class="chat-bubble">
+                                            <div class="rating"><input type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled /><input
+                                                    type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled /><input
+                                                    type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled /><input
+                                                    type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" disabled /><input
+                                                    type="radio" name="rating-stars"
+                                                    class="mask mask-star-2 bg-orange-400" checked disabled /></div>
+                                        </div>
+                                    </div>
+                                    <div class="chat chat-end w-full">
+                                        <div class="chat-bubble">Will definitely be back for more!</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1805,35 +1940,52 @@
                 </div>
                 <div class="achievements flex flex-col gap-4 col-span-2">
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure><img src="https://upload.wikimedia.org/wikipedia/commons/1/13/James_Beard_Foundation_Award_for_Excellence_medallion.jpg" alt="James Beard Award" /></figure>
+                        <figure><img
+                                src="https://upload.wikimedia.org/wikipedia/commons/1/13/James_Beard_Foundation_Award_for_Excellence_medallion.jpg"
+                                alt="James Beard Award" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">James Beard Award for Excellence</h2>
-                            <p>In 2024 we received the James Beard Award for Excellence which is a prestigious recognition in the culinary world.</p>
+                            <p>In 2024 we received the James Beard Award for Excellence which is a prestigious
+                                recognition in the culinary world.</p>
                             <div class="card-actions justify-end"></div>
                         </div>
                     </div>
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure><img src="https://m.media-amazon.com/images/M/MV5BYjJhZjA5YmMtNmRkOC00N2QzLWJhZjUtNjZlMWRjZWE0NjYwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Despierta América" /></figure>
+                        <figure><img
+                                src="https://m.media-amazon.com/images/M/MV5BYjJhZjA5YmMtNmRkOC00N2QzLWJhZjUtNjZlMWRjZWE0NjYwXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"
+                                alt="Despierta América" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">Despierta América</h2>
-                            <p>We were featured on Despierta América, a popular morning show celebrating our authentic Dominican flavors.</p>
-                            <div class="card-actions justify-end"><a href="https://www.youtube.com/@DespiertaAmerica" class="btn btn-primary" target="_blank">Watch</a></div>
+                            <p>We were featured on Despierta América, a popular morning show celebrating our authentic
+                                Dominican flavors.</p>
+                            <div class="card-actions justify-end"><a href="https://www.youtube.com/@DespiertaAmerica"
+                                    class="btn btn-primary" target="_blank">Watch</a></div>
                         </div>
                     </div>
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure><img src="https://library.rice.edu/sites/default/files/styles/wide/public/media-images/The-New-York-Times.png?itok=F-mv39bK" alt="New York Times" /></figure>
+                        <figure><img
+                                src="https://library.rice.edu/sites/default/files/styles/wide/public/media-images/The-New-York-Times.png?itok=F-mv39bK"
+                                alt="New York Times" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">New York Times</h2>
-                            <p>We were featured in the New York Times, highlighting our unique approach to baking and community engagement.</p>
-                            <div class="card-actions justify-end"><a href="https://www.nytimes.com/2020/07/21/dining/bake-sale-activism-racism.html" class="btn btn-primary" target="_blank">Read</a></div>
+                            <p>We were featured in the New York Times, highlighting our unique approach to baking and
+                                community engagement.</p>
+                            <div class="card-actions justify-end"><a
+                                    href="https://www.nytimes.com/2020/07/21/dining/bake-sale-activism-racism.html"
+                                    class="btn btn-primary" target="_blank">Read</a></div>
                         </div>
                     </div>
                     <div class="card card-side bg-base-100 shadow-sm">
-                        <figure><img src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781451628913/baking-with-the-cake-boss-9781451628913_lg.jpg" alt="JefeDeBizcocho" /></figure>
+                        <figure><img
+                                src="https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781451628913/baking-with-the-cake-boss-9781451628913_lg.jpg"
+                                alt="JefeDeBizcocho" /></figure>
                         <div class="card-body">
                             <h2 class="card-title">Interview with JefeDeBizcocho</h2>
-                            <p>We were interviewed by JefeDeBizcocho, sharing insights into our baking journey and passion for Dominican flavors.</p>
-                            <div class="card-actions justify-end"><a href="https://www.instagram.com/buddyvalastro/?hl=en" class="btn btn-primary" target="_blank">Watch</a></div>
+                            <p>We were interviewed by JefeDeBizcocho, sharing insights into our baking journey and
+                                passion for Dominican flavors.</p>
+                            <div class="card-actions justify-end"><a
+                                    href="https://www.instagram.com/buddyvalastro/?hl=en" class="btn btn-primary"
+                                    target="_blank">Watch</a></div>
                         </div>
                     </div>
                 </div>
@@ -1843,49 +1995,99 @@
             <div class="location-content">
                 <div class="location-header">
                     <h3 class="location-title">Catering Services</h3>
-                    <p style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 1rem auto 2rem; text-align: center; line-height: 1.6;">We do catering! Let AZÚCAR bring authentic Dominican flavors to your next event. From intimate gatherings to large celebrations, we offer a wide selection of our signature cakes, desserts, and savory treats in bulk quantities. Perfect for parties, corporate events, weddings, and special occasions.</p>
-                    <p style="font-size: 1rem; color: #f14d0c; font-weight: 600; margin-bottom: 2rem;">Contact us at (718) 555-0123 or (212) 555-0456 to place your catering order!</p>
+                    <p
+                        style="font-size: 1.2rem; color: #666; max-width: 800px; margin: 1rem auto 2rem; text-align: center; line-height: 1.6;">
+                        We do catering! Let AZÚCAR bring authentic Dominican flavors to your next event. From intimate
+                        gatherings to large celebrations, we offer a wide selection of our signature cakes, desserts,
+                        and savory treats in bulk quantities. Perfect for parties, corporate events, weddings, and
+                        special occasions.</p>
+                    <p style="font-size: 1rem; color: #f14d0c; font-weight: 600; margin-bottom: 2rem;">Contact us at
+                        (718) 555-0123 or (212) 555-0456 to place your catering order!</p>
                 </div>
                 <div class="location-cards" style="justify-content: center;">
                     <div class="receipt-card" style="max-width: 700px; margin: 0 auto;">
                         <h3 class="receipt-title">CATERING MENU - BULK PRICING</h3>
                         <ul class="receipt-items">
-                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Dominican Cake</span><span class="receipt-item-price"></span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full Sheet (serves 40-50)</span><span class="receipt-item-price">$180.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half Sheet (serves 20-25)</span><span class="receipt-item-price">$95.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Three Tier (serves 75-100)</span><span class="receipt-item-price">$350.00</span></li>
-                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Tres Leches</span><span class="receipt-item-price"></span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full Sheet (serves 40-50)</span><span class="receipt-item-price">$200.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half Sheet (serves 20-25)</span><span class="receipt-item-price">$105.00</span></li>
-                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large Pan (serves 30-35)</span><span class="receipt-item-price">$120.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Individual Cups (per dozen)</span><span class="receipt-item-price">$45.00</span></li>
-                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Cupcakes</span><span class="receipt-item-price"></span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">2 Dozen</span><span class="receipt-item-price">$55.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">4 Dozen</span><span class="receipt-item-price">$100.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6 Dozen</span><span class="receipt-item-price">$140.00</span></li>
-                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Macarons</span><span class="receipt-item-price"></span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">3 Dozen (assorted flavors)</span><span class="receipt-item-price">$65.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6 Dozen (assorted flavors)</span><span class="receipt-item-price">$120.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">10 Dozen (assorted flavors)</span><span class="receipt-item-price">$190.00</span></li>
-                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Fritos Platter</span><span class="receipt-item-price"></span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small (30 pieces - assorted)</span><span class="receipt-item-price">$85.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Medium (50 pieces - assorted)</span><span class="receipt-item-price">$135.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large (100 pieces - assorted)</span><span class="receipt-item-price">$250.00</span></li>
-                            <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;"><span class="receipt-item-name">Beverages (Bulk)</span><span class="receipt-item-price"></span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Fresh Juice (1 gallon)</span><span class="receipt-item-price">$35.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Dominican Soda (24-pack)</span><span class="receipt-item-price">$60.00</span></li>
-                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Water (24-pack)</span><span class="receipt-item-price">$25.00</span></li>
-                            <li style="font-weight: bold; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid #333; font-size: 0.85rem; color: #666;"><span class="receipt-item-name" style="font-style: italic;">*Minimum order $100 | 48-hour advance notice required | Delivery available for additional fee</span><span class="receipt-item-price"></span></li>
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Dominican Cake</span><span
+                                    class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full
+                                    Sheet (serves 40-50)</span><span class="receipt-item-price">$180.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half
+                                    Sheet (serves 20-25)</span><span class="receipt-item-price">$95.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Three
+                                    Tier (serves 75-100)</span><span class="receipt-item-price">$350.00</span></li>
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Tres Leches</span><span
+                                    class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full
+                                    Sheet (serves 40-50)</span><span class="receipt-item-price">$200.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half
+                                    Sheet (serves 20-25)</span><span class="receipt-item-price">$105.00</span></li>
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large Pan
+                                    (serves 30-35)</span><span class="receipt-item-price">$120.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span
+                                    class="receipt-item-name">Individual Cups (per dozen)</span><span
+                                    class="receipt-item-price">$45.00</span></li>
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Cupcakes</span><span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">2
+                                    Dozen</span><span class="receipt-item-price">$55.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">4
+                                    Dozen</span><span class="receipt-item-price">$100.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6
+                                    Dozen</span><span class="receipt-item-price">$140.00</span></li>
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Macarons</span><span class="receipt-item-price"></span>
+                            </li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">3 Dozen
+                                    (assorted flavors)</span><span class="receipt-item-price">$65.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">6 Dozen
+                                    (assorted flavors)</span><span class="receipt-item-price">$120.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">10 Dozen
+                                    (assorted flavors)</span><span class="receipt-item-price">$190.00</span></li>
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Fritos Platter</span><span
+                                    class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small (30
+                                    pieces - assorted)</span><span class="receipt-item-price">$85.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Medium
+                                    (50 pieces - assorted)</span><span class="receipt-item-price">$135.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large
+                                    (100 pieces - assorted)</span><span class="receipt-item-price">$250.00</span></li>
+                            <li
+                                style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
+                                <span class="receipt-item-name">Beverages (Bulk)</span><span
+                                    class="receipt-item-price"></span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Fresh
+                                    Juice (1 gallon)</span><span class="receipt-item-price">$35.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Dominican
+                                    Soda (24-pack)</span><span class="receipt-item-price">$60.00</span></li>
+                            <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Water
+                                    (24-pack)</span><span class="receipt-item-price">$25.00</span></li>
+                            <li
+                                style="font-weight: bold; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid #333; font-size: 0.85rem; color: #666;">
+                                <span class="receipt-item-name" style="font-style: italic;">*Minimum order $100 |
+                                    48-hour advance notice required | Delivery available for additional fee</span><span
+                                    class="receipt-item-price"></span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-                        
 
-    <div class='wrapper'>
+
+    <div class='wrapper' style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none;">
         <svg class="transition" viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice">
             <defs>
                 <linearGradient id="grad" x1="0" y1="0" x2="99" y2="99" gradientUnits="userSpaceOnUse">
@@ -1903,293 +2105,237 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
 
     <script>
-        // page loads to top of page
-        history.scrollRestoration = 'manual';
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        document.body.scrollTop = 0;
-
-        let path = document.querySelector(".path");
-        let title = document.querySelector(".fixed");
-        let subtitle = document.querySelector(".subtitle");
-        let tabs = document.querySelector(".tabs-container");
-        let tabContent = document.querySelector(".tab-content");
-        let bakeryHeader = document.querySelector(".bakery-header");
-
-        console.log("Elements found:", {
-            path: !!path,
-            title: !!title,
-            subtitle: !!subtitle,
-            tabs: !!tabs,
-            tabContent: !!tabContent
+        // 1. Initial State & GSAP Registration
+        document.addEventListener('DOMContentLoaded', function () {
+            var wrapper = document.querySelector('.wrapper');
+            var mainSections = document.querySelector('.main-sections');
+            if (wrapper) {
+                wrapper.style.display = 'block';
+                gsap.to('.transition', {
+                    duration: 1.5,
+                    opacity: 1,
+                    onComplete: function () {
+                        wrapper.style.display = 'none';
+                        document.body.style.overflowY = 'auto';
+                        if (mainSections) {
+                            mainSections.style.opacity = '1';
+                        }
+                    }
+                });
+            }
         });
+history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+gsap.registerPlugin(Flip);
 
-        const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
-        const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
+document.addEventListener('DOMContentLoaded', function () {
+    // Select all elements
+    const path = document.querySelector(".path");
+    const title = document.querySelector(".fixed");
+    const subtitle = document.querySelector(".subtitle");
+    const tabsContainer = document.querySelector(".tabs-container");
+    const tabContent = document.querySelector(".tab-content");
+    const bakeryHeader = document.querySelector(".bakery-header");
+    const navTabs = document.querySelectorAll('.tab');
+    
+    // Gallery Elements
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const galleryModal = document.getElementById('galleryModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalClose = document.getElementById('modalClose');
 
-        let tl = gsap.timeline();
+    // --- INTRO ANIMATION (GSAP) ---
+    const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
+    const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
 
-        tl.to(path, { attr: { d: start }, duration: 0.6, ease: "power2.in" })
-            .to(path, { attr: { d: end }, duration: 0.6, ease: "power2.out" })
-            .to(title, { top: "50%", duration: 0.4, ease: "power2.out" }, "-=0.4");
+    let tl = gsap.timeline();
+    tl.to(path, { attr: { d: start }, duration: 0.6, ease: "power2.in" })
+      .to(path, { attr: { d: end }, duration: 0.6, ease: "power2.out" })
+      .to(title, { top: "50%", duration: 0.4, ease: "power2.out" }, "-=0.4");
 
-        // Start with gradient visible, then hide it after 1 second
-        tl.seek(tl.duration());
+    tl.seek(tl.duration());
+
+    setTimeout(() => {
+        tl.reverse();
 
         setTimeout(() => {
-            console.log("Starting reverse animation");
-            tl.reverse();
+            gsap.to(subtitle, { opacity: 1, y: 10, duration: 1, ease: "power2.out" });
+            gsap.to(bakeryHeader, { opacity: 1, y: 10, duration: 1, delay: 0.5, ease: "power2.out" });
+            
+            if (tabContent) {
+                gsap.to(tabContent, { opacity: 1, y: 10, duration: 1, delay: 0.8, ease: "power2.out" });
+            }
 
-            // After the animation page appears
             setTimeout(() => {
-                console.log("Fading in content");
-                gsap.to(subtitle, { opacity: 1, y: 10, duration: 1, ease: "power2.out" });
-                gsap.to(bakeryHeader, { opacity: 1, y: 10, duration: 1, delay: 0.5, ease: "power2.out" });
-                if (tabContent) {
-                    gsap.to(tabContent, {
-                        opacity: 1, y: 10, duration: 1, delay: 0.8, ease: "power2.out", onComplete: () => {
-                            console.log("Tab content animation complete");
-                            console.log("Tab content opacity:", window.getComputedStyle(tabContent).opacity);
-                            console.log("Tab content display:", window.getComputedStyle(tabContent).display);
-                            //Enable autoscroll when fully loaded
-                            document.body.style.overflow = 'auto';
-                        }
-                    });
-                } else {
-                    document.body.style.overflow = 'auto';
-                }
-                title.classList.add('active');
-                // Animate title to its final position using GSAP for a smooth upward float
-                gsap.to(title, {
-                    top: '4.2rem',
-                    position: 'absolute',
-                    y: 0,
-                    transform: 'translateX(-50%)',
-                    duration: 0.6,
-                    ease: 'power2.inOut',
-                    delay: 0.08
-                });
-            }, 1200);
-        }, 1000);
+                document.body.style.overflowY = 'auto';
+                // Hide the wrapper after animation
+                const wrapper = document.querySelector('.wrapper');
+                if (wrapper) wrapper.style.display = 'none';
+                // Initialize Tabs once the page is actually scrollable
+                initTabsAndScroll();
+            }, 900);
 
-        // 3D Card Effect
-        const card3d = document.querySelector('.hover-3d');
+            title.classList.add('active');
+            gsap.to(title, {
+                top: '7.2rem',
+                position: 'absolute',
+                y: 0,
+                xPercent: -50, // More reliable than transform: translateX
+                left: '50%',
+                duration: 0.5,
+                ease: 'power2.inOut',
+                delay: 0.01
+            });
+        }, 1200);
+    }, 1000);
+
+    // --- TAB & SCROLL LOGIC ---
+    function initTabsAndScroll() {
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionId = tab.getAttribute('data-section');
+                const section = document.getElementById(sectionId);
+
+                if (section) {
+                    const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
+                    // Calculate precise position regardless of parent styling
+                    const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+
+                    window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                    
+                    // Update active class immediately on click
+                    navTabs.forEach(t => t.classList.remove('tab-active'));
+                    tab.classList.add('tab-active');
+                }
+            });
+        });
+
+        function highlightActiveTab() {
+            const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
+            const scrollY = window.scrollY;
+            let activeTab = navTabs[0];
+
+            navTabs.forEach(tab => {
+                const section = document.getElementById(tab.getAttribute('data-section'));
+                if (section) {
+                    // Check if section is currently in view
+                    const top = (section.getBoundingClientRect().top + window.pageYOffset) - headerHeight - 100;
+                    if (scrollY >= top) {
+                        activeTab = tab;
+                    }
+                }
+            });
+
+            navTabs.forEach(tab => {
+                tab.classList.toggle('tab-active', tab === activeTab);
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveTab);
+    }
+
+    // --- 3D CARD EFFECT ---
+    const card3d = document.querySelector('.hover-3d');
+    if (card3d) {
         const figure = card3d.querySelector('figure');
         let isHovering = false;
 
-        card3d.addEventListener('mouseenter', (e) => {
-            if (e.target === card3d || card3d.contains(e.target)) {
-                isHovering = true;
-            }
+        card3d.addEventListener('mouseenter', () => { isHovering = true; });
+        card3d.addEventListener('mouseleave', () => {
+            isHovering = false;
+            figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
         });
 
         card3d.addEventListener('mousemove', (e) => {
             if (!isHovering) return;
-
-            e.stopPropagation();
-
             const rect = card3d.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
-            if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
-                return;
-            }
-
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-
+            const rotateX = (y - centerY) / 15;
+            const rotateY = (centerX - x) / 15;
             figure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
         });
+    }
 
-        card3d.addEventListener('mouseleave', (e) => {
-            if (!card3d.contains(e.relatedTarget)) {
-                isHovering = false;
-                figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            }
-        });
-
-        // Gallery functionality
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const galleryModal = document.getElementById('galleryModal');
-        const modalImage = document.getElementById('modalImage');
-        const modalClose = document.getElementById('modalClose');
-
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const img = item.querySelector('img');
+    // --- GALLERY MODAL ---
+    galleryItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const img = item.querySelector('img');
+            if (img && galleryModal) {
                 modalImage.src = img.src;
-                gsap.to(galleryModal, {
-                    opacity: 1,
-                    duration: 0.3,
-                    onStart: () => {
-                        galleryModal.classList.add('active');
-                    }
-                });
-            });
+                galleryModal.classList.add('active');
+                gsap.to(galleryModal, { opacity: 1, duration: 0.3 });
+            }
         });
+    });
 
-        function closeModal() {
-            gsap.to(galleryModal, {
-                opacity: 0,
-                duration: 0.3,
-                onComplete: () => {
-                    galleryModal.classList.remove('active');
-                }
-            });
-        }
+    function closeModal() {
+        gsap.to(galleryModal, {
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => { galleryModal.classList.remove('active'); }
+        });
+    }
 
-        modalClose.addEventListener('click', closeModal);
+    if (modalClose) modalClose.addEventListener('click', closeModal);
+    if (galleryModal) {
         galleryModal.addEventListener('click', (e) => {
-            if (e.target === galleryModal) {
-                closeModal();
-            }
+            if (e.target === galleryModal) closeModal();
         });
+    }
 
-        // Tab Navigation: Judo-style scroll & highlight
-        const navTabs = document.querySelectorAll('.tab');
-        const sectionIds = [
-            'home-section',
-            'bushwick-section',
-            'washingtonheights-section',
-            'accomplishments-section',
-            'catering-section'
-        ];
-        const mainHeader = document.querySelector('.bakery-header');
-        const headerHeight = mainHeader ? mainHeader.offsetHeight : 0;
-
-        navTabs.forEach((tab, idx) => {
-            tab.addEventListener('click', function (e) {
-                e.preventDefault();
-                const sectionId = sectionIds[idx];
-                const section = document.getElementById(sectionId);
-                console.log('Tab clicked:', sectionId, 'Index:', idx);
-                if (section) {
-                    const sectionTop = section.getBoundingClientRect().top + window.scrollY - headerHeight - 10;
-                    console.log('Scrolling to:', sectionId, 'Top:', sectionTop, 'HeaderHeight:', headerHeight);
-                    window.scrollTo({
-                        top: sectionTop,
-                        behavior: 'smooth'
-                    });
-                    navTabs.forEach(t => t.classList.remove('tab-active'));
-                    tab.classList.add('tab-active');
-                } else {
-                    console.warn('Section not found:', sectionId);
-                }
-            });
-        });
-
-        // Highlight active tab on scroll
-        function highlightActiveTab() {
-            let scrollY = window.scrollY || window.pageYOffset;
-            let buffer = headerHeight + 20;
-            let activeIndex = 0;
-            for (let i = 0; i < sectionIds.length; i++) {
-                const section = document.getElementById(sectionIds[i]);
-                if (section) {
-                    const top = section.offsetTop - buffer;
-                    const bottom = top + section.offsetHeight;
-                    if (scrollY >= top && scrollY < bottom) {
-                        activeIndex = i;
-                        break;
-                    }
-                }
-            }
-            navTabs.forEach((tab, idx) => {
-                tab.classList.toggle('tab-active', idx === activeIndex);
-            });
-            console.log('Active section:', sectionIds[activeIndex]);
+    // --- CAROUSEL LOGIC ---
+    const carouselStates = {};
+    document.querySelectorAll('[data-carousel]').forEach(container => {
+        const cards = container.querySelectorAll('.card');
+        if (cards.length <= 3) {
+            const btns = container.parentElement.querySelector('.carousel-buttons');
+            if (btns) btns.classList.add('hidden');
         }
-        window.addEventListener('scroll', highlightActiveTab);
-        window.addEventListener('load', highlightActiveTab);
+    });
 
-        // Carousel functionality
-        gsap.registerPlugin(Flip);
-        const carouselStates = {};
-        document.querySelectorAll('[data-carousel]').forEach(carouselContainer => {
-            const cards = carouselContainer.querySelectorAll('.card');
-            if (cards.length <= 3) {
-                const buttonsContainer = carouselContainer.parentElement.querySelector('.carousel-buttons');
-                if (buttonsContainer) {
-                    buttonsContainer.classList.add('hidden');
-                }
+    document.querySelectorAll('[data-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-target');
+            const action = btn.getAttribute('data-action');
+            if (carouselStates[target]) return;
+            
+            carouselStates[target] = true;
+            const container = document.querySelector(`[data-carousel="${target}"]`);
+            updateCarousel(container, action === 'next');
+        });
+    });
+
+    function updateCarousel(container, forward) {
+        const cards = Array.from(container.querySelectorAll('.card'));
+        const targetCard = forward ? cards[0] : cards[cards.length - 1];
+        
+        const newCard = document.createElement('div');
+        newCard.className = targetCard.className;
+        newCard.innerHTML = targetCard.innerHTML;
+
+        gsap.to(targetCard, {
+            opacity: 0,
+            scale: 0.8,
+            duration: 0.3,
+            onComplete: () => {
+                if (forward) container.appendChild(newCard);
+                else container.prepend(newCard);
+                
+                targetCard.remove();
+                gsap.fromTo(newCard, 
+                    { opacity: 0, scale: 0.8 }, 
+                    { opacity: 1, scale: 1, duration: 0.3, onComplete: () => {
+                        carouselStates[container.getAttribute('data-carousel')] = false;
+                    }}
+                );
             }
         });
-
-        document.querySelectorAll('[data-action]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.getAttribute('data-target');
-                const action = btn.getAttribute('data-action');
-                if (carouselStates[target]) return;
-                carouselStates[target] = true;
-                const container = document.querySelector(`[data-carousel="${target}"]`);
-                updateCarousel(container, action === 'next');
-            });
-        });
-
-        function updateCarousel(container, forward) {
-            const cards = Array.from(container.querySelectorAll('.card'));
-            if (forward) {
-                const first = cards[0];
-                const newCard = document.createElement('div');
-                newCard.className = 'card bg-base-100 shadow-sm';
-                newCard.innerHTML = first.innerHTML;
-
-                // Fade out the first card
-                gsap.to(first, {
-                    opacity: 0,
-                    scale: 0.8,
-                    duration: 0.3,
-                    onComplete: () => {
-                        container.appendChild(newCard);
-                        first.remove();
-                        gsap.fromTo(newCard,
-                            { opacity: 0, scale: 0.8 },
-                            {
-                                opacity: 1,
-                                scale: 1,
-                                duration: 0.3,
-                                onComplete: () => {
-                                    const target = container.getAttribute('data-carousel');
-                                    carouselStates[target] = false;
-                                }
-                            }
-                        );
-                    }
-                });
-            } else {
-                const last = cards[cards.length - 1];
-                const newCard = document.createElement('div');
-                newCard.className = 'card bg-base-100 shadow-sm';
-                newCard.innerHTML = last.innerHTML;
-
-                // Fade out the last card
-                gsap.to(last, {
-                    opacity: 0,
-                    scale: 0.8,
-                    duration: 0.3,
-                    onComplete: () => {
-                        container.prepend(newCard);
-                        last.remove();
-                        gsap.fromTo(newCard,
-                            { opacity: 0, scale: 0.8 },
-                            {
-                                opacity: 1,
-                                scale: 1,
-                                duration: 0.3,
-                                onComplete: () => {
-                                    const target = container.getAttribute('data-carousel');
-                                    carouselStates[target] = false;
-                                }
-                            }
-                        );
-                    }
-                });
-            }
-        }
+    }
+});
     </script>
 </body>
 
