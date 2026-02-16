@@ -2104,239 +2104,206 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
 
-    <script>
-        // 1. Initial State & GSAP Registration
-        document.addEventListener('DOMContentLoaded', function () {
-            var wrapper = document.querySelector('.wrapper');
-            var mainSections = document.querySelector('.main-sections');
-            if (wrapper) {
-                wrapper.style.display = 'block';
-                gsap.to('.transition', {
-                    duration: 1.5,
-                    opacity: 1,
-                    onComplete: function () {
-                        wrapper.style.display = 'none';
-                        document.body.style.overflowY = 'auto';
-                        if (mainSections) {
-                            mainSections.style.opacity = '1';
-                        }
-                    }
-                });
-            }
-        });
-history.scrollRestoration = 'manual';
-window.scrollTo(0, 0);
-gsap.registerPlugin(Flip);
+<script>
+    // 1. Initial State & GSAP Registration
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    gsap.registerPlugin(Flip);
 
-document.addEventListener('DOMContentLoaded', function () {
-    // Select all elements
-    const path = document.querySelector(".path");
-    const title = document.querySelector(".fixed");
-    const subtitle = document.querySelector(".subtitle");
-    const tabsContainer = document.querySelector(".tabs-container");
-    const tabContent = document.querySelector(".tab-content");
-    const bakeryHeader = document.querySelector(".bakery-header");
-    const navTabs = document.querySelectorAll('.tab');
-    
-    // Gallery Elements
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const galleryModal = document.getElementById('galleryModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalClose = document.getElementById('modalClose');
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select all elements
+        const path = document.querySelector(".path");
+        const title = document.querySelector(".fixed");
+        const subtitle = document.querySelector(".subtitle");
+        const mainSections = document.querySelector(".main-sections");
+        const bakeryHeader = document.querySelector(".bakery-header");
+        const navTabs = document.querySelectorAll('.tab');
+        const wrapper = document.querySelector('.wrapper');
+        
+        // Gallery Elements
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const galleryModal = document.getElementById('galleryModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.getElementById('modalClose');
 
-    // --- INTRO ANIMATION (GSAP) ---
-    const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
-    const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
+        // --- 2. INTRO ANIMATION SETUP ---
+        const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
+        const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
 
-    let tl = gsap.timeline();
-    tl.to(path, { attr: { d: start }, duration: 0.6, ease: "power2.in" })
-      .to(path, { attr: { d: end }, duration: 0.6, ease: "power2.out" })
-      .to(title, { top: "50%", duration: 0.4, ease: "power2.out" }, "-=0.4");
+        let tl = gsap.timeline();
+        
+        // Build the initial "curtain" cover
+        tl.to(path, { attr: { d: start }, duration: 0.6, ease: "power2.in" })
+          .to(path, { attr: { d: end }, duration: 0.6, ease: "power2.out" })
+          .to(title, { top: "50%", duration: 0.4, ease: "power2.out" }, "-=0.4");
 
-    tl.seek(tl.duration());
+        // Set to final frame of intro
+        tl.seek(tl.duration());
 
-    setTimeout(() => {
-        tl.reverse();
-
+        // --- 3. THE SIMULTANEOUS REVEAL ---
         setTimeout(() => {
-            gsap.to(subtitle, { opacity: 1, y: 10, duration: 1, ease: "power2.out" });
-            gsap.to(bakeryHeader, { opacity: 1, y: 10, duration: 1, delay: 0.5, ease: "power2.out" });
-            
-            if (tabContent) {
-                gsap.to(tabContent, { opacity: 1, y: 10, duration: 1, delay: 0.8, ease: "power2.out" });
-            }
+            // A. Start the Color Swipe Reverse
+            tl.reverse();
 
-            setTimeout(() => {
-                document.body.style.overflowY = 'auto';
-                // Hide the wrapper after animation
-                const wrapper = document.querySelector('.wrapper');
-                if (wrapper) wrapper.style.display = 'none';
-                // Initialize Tabs once the page is actually scrollable
-                initTabsAndScroll();
-            }, 900);
-
-            title.classList.add('active');
+            // B. Lift Title SIMULTANEOUSLY with the swipe
             gsap.to(title, {
                 top: '7.2rem',
                 position: 'absolute',
                 y: 0,
-                xPercent: -50, // More reliable than transform: translateX
+                xPercent: -50,
                 left: '50%',
-                duration: 0.5,
+                duration: 0.4, 
                 ease: 'power2.inOut',
-                delay: 0.01
+                onStart: () => title.classList.add('active')
             });
-        }, 1200);
-    }, 1000);
 
-    // --- TAB & SCROLL LOGIC ---
-    function initTabsAndScroll() {
-        navTabs.forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                e.preventDefault();
-                const sectionId = tab.getAttribute('data-section');
-                const section = document.getElementById(sectionId);
-
-                if (section) {
-                    const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
-                    // Calculate precise position regardless of parent styling
-                    const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
-
-                    window.scrollTo({ top: sectionTop, behavior: 'smooth' });
-                    
-                    // Update active class immediately on click
-                    navTabs.forEach(t => t.classList.remove('tab-active'));
-                    tab.classList.add('tab-active');
+            // C. Fade in Page Content
+            // Targeting .main-sections because that is your primary content wrapper
+            gsap.to([subtitle, bakeryHeader, mainSections], { 
+                opacity: 1, 
+                y: 0, 
+                duration: .6, 
+                stagger: 0.05, 
+                ease: "power2.out",
+                delay: 0.1,
+                onStart: () => {
+                    // Force visibility in case CSS has display: none
+                    if (mainSections) mainSections.style.display = 'flex';
+                    if (bakeryHeader) bakeryHeader.style.opacity = '1';
                 }
             });
-        });
 
-        function highlightActiveTab() {
-            const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
-            const scrollY = window.scrollY;
-            let activeTab = navTabs[0];
+            // D. Clean up and Enable Scroll
+            setTimeout(() => {
+                document.body.style.overflowY = 'auto';
+                if (wrapper) {
+                    wrapper.style.opacity = '0';
+                    wrapper.style.pointerEvents = 'none';
+                    setTimeout(() => wrapper.style.display = 'none', 500);
+                }
+                initTabsAndScroll();
+            }, 1000);
 
+        }, 1000);
+
+        // --- 4. TAB & SCROLL LOGIC ---
+        function initTabsAndScroll() {
             navTabs.forEach(tab => {
-                const section = document.getElementById(tab.getAttribute('data-section'));
-                if (section) {
-                    // Check if section is currently in view
-                    const top = (section.getBoundingClientRect().top + window.pageYOffset) - headerHeight - 100;
-                    if (scrollY >= top) {
-                        activeTab = tab;
+                tab.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = tab.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+
+                    if (section) {
+                        const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
+                        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+                        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
                     }
+                });
+            });
+
+            function highlightActiveTab() {
+                const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
+                const scrollY = window.scrollY;
+                let activeTab = navTabs[0];
+
+                navTabs.forEach(tab => {
+                    const section = document.getElementById(tab.getAttribute('data-section'));
+                    if (section) {
+                        const top = (section.getBoundingClientRect().top + window.pageYOffset) - headerHeight - 150;
+                        if (scrollY >= top) activeTab = tab;
+                    }
+                });
+
+                navTabs.forEach(tab => {
+                    tab.classList.toggle('tab-active', tab === activeTab);
+                });
+            }
+
+            window.addEventListener('scroll', highlightActiveTab);
+            highlightActiveTab(); // Run once on init
+        }
+
+        // --- 5. 3D CARD EFFECT ---
+        const card3d = document.querySelector('.hover-3d');
+        if (card3d) {
+            const figure = card3d.querySelector('figure');
+            card3d.addEventListener('mousemove', (e) => {
+                const rect = card3d.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                figure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+
+            card3d.addEventListener('mouseleave', () => {
+                figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+            });
+        }
+
+        // --- 6. GALLERY MODAL ---
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                if (img && galleryModal) {
+                    modalImage.src = img.src;
+                    galleryModal.classList.add('active');
+                    gsap.to(galleryModal, { opacity: 1, duration: 0.3 });
                 }
             });
+        });
 
-            navTabs.forEach(tab => {
-                tab.classList.toggle('tab-active', tab === activeTab);
+        function closeModal() {
+            gsap.to(galleryModal, {
+                opacity: 0,
+                duration: 0.3,
+                onComplete: () => { galleryModal.classList.remove('active'); }
             });
         }
 
-        window.addEventListener('scroll', highlightActiveTab);
-    }
-
-    // --- 3D CARD EFFECT ---
-    const card3d = document.querySelector('.hover-3d');
-    if (card3d) {
-        const figure = card3d.querySelector('figure');
-        let isHovering = false;
-
-        card3d.addEventListener('mouseenter', () => { isHovering = true; });
-        card3d.addEventListener('mouseleave', () => {
-            isHovering = false;
-            figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-        });
-
-        card3d.addEventListener('mousemove', (e) => {
-            if (!isHovering) return;
-            const rect = card3d.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / 15;
-            const rotateY = (centerX - x) / 15;
-            figure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-        });
-    }
-
-    // --- GALLERY MODAL ---
-    galleryItems.forEach(item => {
-        item.addEventListener('click', () => {
-            const img = item.querySelector('img');
-            if (img && galleryModal) {
-                modalImage.src = img.src;
-                galleryModal.classList.add('active');
-                gsap.to(galleryModal, { opacity: 1, duration: 0.3 });
-            }
-        });
-    });
-
-    function closeModal() {
-        gsap.to(galleryModal, {
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => { galleryModal.classList.remove('active'); }
-        });
-    }
-
-    if (modalClose) modalClose.addEventListener('click', closeModal);
-    if (galleryModal) {
-        galleryModal.addEventListener('click', (e) => {
-            if (e.target === galleryModal) closeModal();
-        });
-    }
-
-    // --- CAROUSEL LOGIC ---
-    const carouselStates = {};
-    document.querySelectorAll('[data-carousel]').forEach(container => {
-        const cards = container.querySelectorAll('.card');
-        if (cards.length <= 3) {
-            const btns = container.parentElement.querySelector('.carousel-buttons');
-            if (btns) btns.classList.add('hidden');
+        if (modalClose) modalClose.addEventListener('click', closeModal);
+        if (galleryModal) {
+            galleryModal.addEventListener('click', (e) => {
+                if (e.target === galleryModal) closeModal();
+            });
         }
-    });
 
-    document.querySelectorAll('[data-action]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const target = btn.getAttribute('data-target');
-            const action = btn.getAttribute('data-action');
-            if (carouselStates[target]) return;
-            
-            carouselStates[target] = true;
-            const container = document.querySelector(`[data-carousel="${target}"]`);
-            updateCarousel(container, action === 'next');
-        });
-    });
-
-    function updateCarousel(container, forward) {
-        const cards = Array.from(container.querySelectorAll('.card'));
-        const targetCard = forward ? cards[0] : cards[cards.length - 1];
-        
-        const newCard = document.createElement('div');
-        newCard.className = targetCard.className;
-        newCard.innerHTML = targetCard.innerHTML;
-
-        gsap.to(targetCard, {
-            opacity: 0,
-            scale: 0.8,
-            duration: 0.3,
-            onComplete: () => {
-                if (forward) container.appendChild(newCard);
-                else container.prepend(newCard);
+        // --- 7. CAROUSEL LOGIC ---
+        const carouselStates = {};
+        document.querySelectorAll('[data-action]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const target = btn.getAttribute('data-target');
+                const action = btn.getAttribute('data-action');
+                if (carouselStates[target]) return;
                 
-                targetCard.remove();
-                gsap.fromTo(newCard, 
-                    { opacity: 0, scale: 0.8 }, 
-                    { opacity: 1, scale: 1, duration: 0.3, onComplete: () => {
-                        carouselStates[container.getAttribute('data-carousel')] = false;
-                    }}
-                );
-            }
+                carouselStates[target] = true;
+                const container = document.querySelector(`[data-carousel="${target}"]`);
+                const forward = action === 'next';
+                const cards = Array.from(container.querySelectorAll('.card'));
+                const targetCard = forward ? cards[0] : cards[cards.length - 1];
+                
+                const newCard = targetCard.cloneNode(true);
+
+                gsap.to(targetCard, {
+                    opacity: 0,
+                    scale: 0.8,
+                    duration: 0.3,
+                    onComplete: () => {
+                        forward ? container.appendChild(newCard) : container.prepend(newCard);
+                        targetCard.remove();
+                        gsap.fromTo(newCard, { opacity: 0, scale: 0.8 }, { 
+                            opacity: 1, scale: 1, duration: 0.3, 
+                            onComplete: () => { carouselStates[target] = false; }
+                        });
+                    }
+                });
+            });
         });
-    }
-});
-    </script>
+    });
+</script>
 </body>
 
 </html>
