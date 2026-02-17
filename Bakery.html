@@ -21,6 +21,7 @@
 
         .fixed {
             position: absolute;
+            max-width: 100%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -102,6 +103,34 @@
 
             .bakery-header .tab {
                 flex: 0 0 auto;
+            }
+        }
+
+        /* Example: Scaling the main title for mobile */
+        @media (max-width: 640px) {
+            .fixed {
+                font-size: 2.5rem;
+                /* Shrunk from 5rem */
+                top: 40%;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+                top: 18%;
+                width: 90%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .location-cards {
+                flex-direction: column;
+                /* Stack the map and hours */
+            }
+
+            .main-card-section {
+                width: 95%;
+                padding: 1rem;
             }
         }
 
@@ -287,6 +316,7 @@
         }
 
         .main-card-section {
+            max-width: 100%;
             width: 90%;
             max-width: 1200px;
             background: #f5f5f5;
@@ -1099,7 +1129,8 @@
                             <ul class="receipt-items">
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Dominican Cake</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Slice</span><span
                                         class="receipt-item-price">$5.00</span></li>
@@ -1112,7 +1143,8 @@
                                         Tier</span><span class="receipt-item-price">$90.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Tres Leches</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Slice</span><span
                                         class="receipt-item-price">$6.00</span></li>
@@ -1133,7 +1165,8 @@
                                         class="receipt-item-price">$25.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Cupcakes</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Single</span><span
                                         class="receipt-item-price">$4.50</span></li>
@@ -1145,7 +1178,8 @@
                                         class="receipt-item-price">$42.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Macarons</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Single</span><span
                                         class="receipt-item-price">$2.00</span></li>
@@ -1157,7 +1191,8 @@
                                         class="receipt-item-price">$18.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">House Made Juices</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Small</span><span
                                         class="receipt-item-price">$7.00</span></li>
@@ -1521,7 +1556,8 @@
                             <ul class="receipt-items">
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Dominican Cake</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Slice</span><span
                                         class="receipt-item-price">$5.50</span></li>
@@ -1534,7 +1570,8 @@
                                         Tier</span><span class="receipt-item-price">$95.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Tres Leches</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Slice</span><span
                                         class="receipt-item-price">$6.50</span></li>
@@ -1555,7 +1592,8 @@
                                         class="receipt-item-price">$27.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Cupcakes</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Single</span><span
                                         class="receipt-item-price">$4.00</span></li>
@@ -1567,7 +1605,8 @@
                                         class="receipt-item-price">$40.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">Macarons</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Single</span><span
                                         class="receipt-item-price">$2.25</span></li>
@@ -1579,7 +1618,8 @@
                                         class="receipt-item-price">$20.00</span></li>
                                 <li style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem;">
                                     <span class="receipt-item-name">House Made Juices</span><span
-                                        class="receipt-item-price"></span></li>
+                                        class="receipt-item-price"></span>
+                                </li>
                                 <li style="padding-left: 1rem; font-size: 0.9rem;"><span
                                         class="receipt-item-name">Small</span><span
                                         class="receipt-item-price">$7.50</span></li>
@@ -2011,7 +2051,8 @@
                             <li
                                 style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
                                 <span class="receipt-item-name">Dominican Cake</span><span
-                                    class="receipt-item-price"></span></li>
+                                    class="receipt-item-price"></span>
+                            </li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full
                                     Sheet (serves 40-50)</span><span class="receipt-item-price">$180.00</span></li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half
@@ -2021,14 +2062,16 @@
                             <li
                                 style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
                                 <span class="receipt-item-name">Tres Leches</span><span
-                                    class="receipt-item-price"></span></li>
+                                    class="receipt-item-price"></span>
+                            </li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Full
                                     Sheet (serves 40-50)</span><span class="receipt-item-price">$200.00</span></li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Half
                                     Sheet (serves 20-25)</span><span class="receipt-item-price">$105.00</span></li>
                             <li
                                 style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
-                                <span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span></li>
+                                <span class="receipt-item-name">Flan</span><span class="receipt-item-price"></span>
+                            </li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Large Pan
                                     (serves 30-35)</span><span class="receipt-item-price">$120.00</span></li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span
@@ -2057,7 +2100,8 @@
                             <li
                                 style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
                                 <span class="receipt-item-name">Fritos Platter</span><span
-                                    class="receipt-item-price"></span></li>
+                                    class="receipt-item-price"></span>
+                            </li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Small (30
                                     pieces - assorted)</span><span class="receipt-item-price">$85.00</span></li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Medium
@@ -2067,7 +2111,8 @@
                             <li
                                 style="font-weight: bold; border-bottom: 1px solid #999; padding-bottom: 0.3rem; margin-top: 1rem;">
                                 <span class="receipt-item-name">Beverages (Bulk)</span><span
-                                    class="receipt-item-price"></span></li>
+                                    class="receipt-item-price"></span>
+                            </li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Fresh
                                     Juice (1 gallon)</span><span class="receipt-item-price">$35.00</span></li>
                             <li style="padding-left: 1rem; font-size: 0.9rem;"><span class="receipt-item-name">Dominican
@@ -2078,7 +2123,8 @@
                                 style="font-weight: bold; margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid #333; font-size: 0.85rem; color: #666;">
                                 <span class="receipt-item-name" style="font-style: italic;">*Minimum order $100 |
                                     48-hour advance notice required | Delivery available for additional fee</span><span
-                                    class="receipt-item-price"></span></li>
+                                    class="receipt-item-price"></span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -2087,7 +2133,8 @@
     </div>
 
 
-    <div class='wrapper' style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none;">
+    <div class='wrapper'
+        style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; pointer-events: none;">
         <svg class="transition" viewBox="0 0 100 100" preserveAspectRatio="xMidYMin slice">
             <defs>
                 <linearGradient id="grad" x1="0" y1="0" x2="99" y2="99" gradientUnits="userSpaceOnUse">
@@ -2104,206 +2151,206 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
 
-<script>
-    // 1. Initial State & GSAP Registration
-    history.scrollRestoration = 'manual';
-    window.scrollTo(0, 0);
-    gsap.registerPlugin(Flip);
+    <script>
+        // 1. Initial State & GSAP Registration
+        history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+        gsap.registerPlugin(Flip);
 
-    document.addEventListener('DOMContentLoaded', function () {
-        // Select all elements
-        const path = document.querySelector(".path");
-        const title = document.querySelector(".fixed");
-        const subtitle = document.querySelector(".subtitle");
-        const mainSections = document.querySelector(".main-sections");
-        const bakeryHeader = document.querySelector(".bakery-header");
-        const navTabs = document.querySelectorAll('.tab');
-        const wrapper = document.querySelector('.wrapper');
-        
-        // Gallery Elements
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const galleryModal = document.getElementById('galleryModal');
-        const modalImage = document.getElementById('modalImage');
-        const modalClose = document.getElementById('modalClose');
+        document.addEventListener('DOMContentLoaded', function () {
+            // Select all elements
+            const path = document.querySelector(".path");
+            const title = document.querySelector(".fixed");
+            const subtitle = document.querySelector(".subtitle");
+            const mainSections = document.querySelector(".main-sections");
+            const bakeryHeader = document.querySelector(".bakery-header");
+            const navTabs = document.querySelectorAll('.tab');
+            const wrapper = document.querySelector('.wrapper');
 
-        // --- 2. INTRO ANIMATION SETUP ---
-        const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
-        const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
+            // Gallery Elements
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const galleryModal = document.getElementById('galleryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalClose = document.getElementById('modalClose');
 
-        let tl = gsap.timeline();
-        
-        // Build the initial "curtain" cover
-        tl.to(path, { attr: { d: start }, duration: 0.6, ease: "power2.in" })
-          .to(path, { attr: { d: end }, duration: 0.6, ease: "power2.out" })
-          .to(title, { top: "50%", duration: 0.4, ease: "power2.out" }, "-=0.4");
+            // --- 2. INTRO ANIMATION SETUP ---
+            const start = "M 0 100 V 50 Q 50 0 100 50 V 100 z";
+            const end = "M 0 100 V 0 Q 50 0 100 0 V 100 z";
 
-        // Set to final frame of intro
-        tl.seek(tl.duration());
+            let tl = gsap.timeline();
 
-        // --- 3. THE SIMULTANEOUS REVEAL ---
-        setTimeout(() => {
-            // A. Start the Color Swipe Reverse
-            tl.reverse();
+            // Build the initial "curtain" cover
+            tl.to(path, { attr: { d: start }, duration: 0.6, ease: "power2.in" })
+                .to(path, { attr: { d: end }, duration: 0.6, ease: "power2.out" })
+                .to(title, { top: "50%", duration: 0.4, ease: "power2.out" }, "-=0.4");
 
-            // B. Lift Title SIMULTANEOUSLY with the swipe
-            gsap.to(title, {
-                top: '7.2rem',
-                position: 'absolute',
-                y: 0,
-                xPercent: -50,
-                left: '50%',
-                duration: 0.4, 
-                ease: 'power2.inOut',
-                onStart: () => title.classList.add('active')
-            });
+            // Set to final frame of intro
+            tl.seek(tl.duration());
 
-            // C. Fade in Page Content
-            // Targeting .main-sections because that is your primary content wrapper
-            gsap.to([subtitle, bakeryHeader, mainSections], { 
-                opacity: 1, 
-                y: 0, 
-                duration: .6, 
-                stagger: 0.05, 
-                ease: "power2.out",
-                delay: 0.1,
-                onStart: () => {
-                    // Force visibility in case CSS has display: none
-                    if (mainSections) mainSections.style.display = 'flex';
-                    if (bakeryHeader) bakeryHeader.style.opacity = '1';
-                }
-            });
-
-            // D. Clean up and Enable Scroll
+            // --- 3. THE SIMULTANEOUS REVEAL ---
             setTimeout(() => {
-                document.body.style.overflowY = 'auto';
-                if (wrapper) {
-                    wrapper.style.opacity = '0';
-                    wrapper.style.pointerEvents = 'none';
-                    setTimeout(() => wrapper.style.display = 'none', 500);
-                }
-                initTabsAndScroll();
+                // A. Start the Color Swipe Reverse
+                tl.reverse();
+
+                // B. Lift Title SIMULTANEOUSLY with the swipe
+                gsap.to(title, {
+                    top: '7.2rem',
+                    position: 'absolute',
+                    y: 0,
+                    xPercent: -50,
+                    left: '50%',
+                    duration: 0.4,
+                    ease: 'power2.inOut',
+                    onStart: () => title.classList.add('active')
+                });
+
+                // C. Fade in Page Content
+                // Targeting .main-sections because that is your primary content wrapper
+                gsap.to([subtitle, bakeryHeader, mainSections], {
+                    opacity: 1,
+                    y: 0,
+                    duration: .6,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                    delay: 0.1,
+                    onStart: () => {
+                        // Force visibility in case CSS has display: none
+                        if (mainSections) mainSections.style.display = 'flex';
+                        if (bakeryHeader) bakeryHeader.style.opacity = '1';
+                    }
+                });
+
+                // D. Clean up and Enable Scroll
+                setTimeout(() => {
+                    document.body.style.overflowY = 'auto';
+                    if (wrapper) {
+                        wrapper.style.opacity = '0';
+                        wrapper.style.pointerEvents = 'none';
+                        setTimeout(() => wrapper.style.display = 'none', 500);
+                    }
+                    initTabsAndScroll();
+                }, 1000);
+
             }, 1000);
 
-        }, 1000);
-
-        // --- 4. TAB & SCROLL LOGIC ---
-        function initTabsAndScroll() {
-            navTabs.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const sectionId = tab.getAttribute('data-section');
-                    const section = document.getElementById(sectionId);
-
-                    if (section) {
-                        const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
-                        const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
-                        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
-                    }
-                });
-            });
-
-            function highlightActiveTab() {
-                const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
-                const scrollY = window.scrollY;
-                let activeTab = navTabs[0];
-
+            // --- 4. TAB & SCROLL LOGIC ---
+            function initTabsAndScroll() {
                 navTabs.forEach(tab => {
-                    const section = document.getElementById(tab.getAttribute('data-section'));
-                    if (section) {
-                        const top = (section.getBoundingClientRect().top + window.pageYOffset) - headerHeight - 150;
-                        if (scrollY >= top) activeTab = tab;
-                    }
+                    tab.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const sectionId = tab.getAttribute('data-section');
+                        const section = document.getElementById(sectionId);
+
+                        if (section) {
+                            const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
+                            const sectionTop = section.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10;
+                            window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                        }
+                    });
                 });
 
-                navTabs.forEach(tab => {
-                    tab.classList.toggle('tab-active', tab === activeTab);
+                function highlightActiveTab() {
+                    const headerHeight = bakeryHeader ? bakeryHeader.offsetHeight : 0;
+                    const scrollY = window.scrollY;
+                    let activeTab = navTabs[0];
+
+                    navTabs.forEach(tab => {
+                        const section = document.getElementById(tab.getAttribute('data-section'));
+                        if (section) {
+                            const top = (section.getBoundingClientRect().top + window.pageYOffset) - headerHeight - 150;
+                            if (scrollY >= top) activeTab = tab;
+                        }
+                    });
+
+                    navTabs.forEach(tab => {
+                        tab.classList.toggle('tab-active', tab === activeTab);
+                    });
+                }
+
+                window.addEventListener('scroll', highlightActiveTab);
+                highlightActiveTab(); // Run once on init
+            }
+
+            // --- 5. 3D CARD EFFECT ---
+            const card3d = document.querySelector('.hover-3d');
+            if (card3d) {
+                const figure = card3d.querySelector('figure');
+                card3d.addEventListener('mousemove', (e) => {
+                    const rect = card3d.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    figure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
+
+                card3d.addEventListener('mouseleave', () => {
+                    figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
                 });
             }
 
-            window.addEventListener('scroll', highlightActiveTab);
-            highlightActiveTab(); // Run once on init
-        }
-
-        // --- 5. 3D CARD EFFECT ---
-        const card3d = document.querySelector('.hover-3d');
-        if (card3d) {
-            const figure = card3d.querySelector('figure');
-            card3d.addEventListener('mousemove', (e) => {
-                const rect = card3d.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 15;
-                const rotateY = (centerX - x) / 15;
-                figure.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
-            });
-
-            card3d.addEventListener('mouseleave', () => {
-                figure.style.transform = 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-            });
-        }
-
-        // --- 6. GALLERY MODAL ---
-        galleryItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const img = item.querySelector('img');
-                if (img && galleryModal) {
-                    modalImage.src = img.src;
-                    galleryModal.classList.add('active');
-                    gsap.to(galleryModal, { opacity: 1, duration: 0.3 });
-                }
-            });
-        });
-
-        function closeModal() {
-            gsap.to(galleryModal, {
-                opacity: 0,
-                duration: 0.3,
-                onComplete: () => { galleryModal.classList.remove('active'); }
-            });
-        }
-
-        if (modalClose) modalClose.addEventListener('click', closeModal);
-        if (galleryModal) {
-            galleryModal.addEventListener('click', (e) => {
-                if (e.target === galleryModal) closeModal();
-            });
-        }
-
-        // --- 7. CAROUSEL LOGIC ---
-        const carouselStates = {};
-        document.querySelectorAll('[data-action]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.getAttribute('data-target');
-                const action = btn.getAttribute('data-action');
-                if (carouselStates[target]) return;
-                
-                carouselStates[target] = true;
-                const container = document.querySelector(`[data-carousel="${target}"]`);
-                const forward = action === 'next';
-                const cards = Array.from(container.querySelectorAll('.card'));
-                const targetCard = forward ? cards[0] : cards[cards.length - 1];
-                
-                const newCard = targetCard.cloneNode(true);
-
-                gsap.to(targetCard, {
-                    opacity: 0,
-                    scale: 0.8,
-                    duration: 0.3,
-                    onComplete: () => {
-                        forward ? container.appendChild(newCard) : container.prepend(newCard);
-                        targetCard.remove();
-                        gsap.fromTo(newCard, { opacity: 0, scale: 0.8 }, { 
-                            opacity: 1, scale: 1, duration: 0.3, 
-                            onComplete: () => { carouselStates[target] = false; }
-                        });
+            // --- 6. GALLERY MODAL ---
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    if (img && galleryModal) {
+                        modalImage.src = img.src;
+                        galleryModal.classList.add('active');
+                        gsap.to(galleryModal, { opacity: 1, duration: 0.3 });
                     }
                 });
             });
+
+            function closeModal() {
+                gsap.to(galleryModal, {
+                    opacity: 0,
+                    duration: 0.3,
+                    onComplete: () => { galleryModal.classList.remove('active'); }
+                });
+            }
+
+            if (modalClose) modalClose.addEventListener('click', closeModal);
+            if (galleryModal) {
+                galleryModal.addEventListener('click', (e) => {
+                    if (e.target === galleryModal) closeModal();
+                });
+            }
+
+            // --- 7. CAROUSEL LOGIC ---
+            const carouselStates = {};
+            document.querySelectorAll('[data-action]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-target');
+                    const action = btn.getAttribute('data-action');
+                    if (carouselStates[target]) return;
+
+                    carouselStates[target] = true;
+                    const container = document.querySelector(`[data-carousel="${target}"]`);
+                    const forward = action === 'next';
+                    const cards = Array.from(container.querySelectorAll('.card'));
+                    const targetCard = forward ? cards[0] : cards[cards.length - 1];
+
+                    const newCard = targetCard.cloneNode(true);
+
+                    gsap.to(targetCard, {
+                        opacity: 0,
+                        scale: 0.8,
+                        duration: 0.3,
+                        onComplete: () => {
+                            forward ? container.appendChild(newCard) : container.prepend(newCard);
+                            targetCard.remove();
+                            gsap.fromTo(newCard, { opacity: 0, scale: 0.8 }, {
+                                opacity: 1, scale: 1, duration: 0.3,
+                                onComplete: () => { carouselStates[target] = false; }
+                            });
+                        }
+                    });
+                });
+            });
         });
-    });
-</script>
+    </script>
 </body>
 
 </html>
